@@ -1,5 +1,5 @@
 ﻿import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+
 import {
   Building2,
   CheckCircle2,
@@ -9,7 +9,7 @@ import {
   KeyRound,
   MessageCircle,
   Phone,
-  RefreshCw,
+  ExternalLink,
   ShieldCheck,
   Sparkles,
   Star,
@@ -48,35 +48,33 @@ const INSTAGRAM = "https://www.instagram.com/g.r.u.p.o_invest/";
 const INSTAGRAM_POST = "https://www.instagram.com/p/DdE4LDxJfCQ/";
 
 function InstagramVideo() {
-  const [playerKey, setPlayerKey] = useState(0);
-
   return (
-    <div className="overflow-hidden rounded-[2rem] border border-border bg-card shadow-soft">
-      <div className="relative h-[600px] bg-white sm:h-[680px]">
-        <iframe
-          key={playerKey}
-          src={`${INSTAGRAM_POST}embed/captioned/`}
-          title="Vídeo do Grupo Invest no Instagram"
-          loading="lazy"
-          className="absolute inset-0 h-full w-full border-0"
-          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-        />
+    <div className="mx-auto w-full max-w-[390px]">
+      <div className="relative rounded-[2.25rem] bg-navy-deep p-2 shadow-soft ring-1 ring-navy/10">
+        <div className="pointer-events-none absolute left-1/2 top-3 z-10 h-1.5 w-16 -translate-x-1/2 rounded-full bg-primary-foreground/25" />
+        <div className="relative h-[620px] overflow-hidden rounded-[1.8rem] bg-white sm:h-[680px]">
+          <iframe
+            src={`${INSTAGRAM_POST}embed/captioned/`}
+            title="Vídeo do Grupo Invest no Instagram"
+            loading="lazy"
+            className="absolute inset-0 h-full w-full border-0"
+            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+            allowFullScreen
+          />
+        </div>
       </div>
-      <div className="flex flex-wrap items-center justify-between gap-3 border-t border-border bg-card px-5 py-4">
-        <p className="text-xs text-muted-foreground">O vídeo não reiniciou corretamente?</p>
-        <button
-          type="button"
-          onClick={() => setPlayerKey((key) => key + 1)}
-          className="inline-flex items-center gap-2 rounded-full bg-sky-soft px-4 py-2 text-xs font-bold text-navy transition-colors hover:bg-sky hover:text-primary-foreground"
-        >
-          <RefreshCw className="h-3.5 w-3.5" />
-          Reproduzir novamente
-        </button>
-      </div>
+      <a
+        href={INSTAGRAM_POST}
+        target="_blank"
+        rel="noreferrer"
+        className="mx-auto mt-4 flex w-fit items-center gap-2 text-sm font-semibold text-navy transition-colors hover:text-sky"
+      >
+        Assistir no Instagram
+        <ExternalLink className="h-4 w-4" />
+      </a>
     </div>
   );
 }
-
 const beneficios = [
   {
     icon: HandCoins,
@@ -240,7 +238,9 @@ function Index() {
                 <Building2 className="h-9 w-9 text-sky" />
                 <div>
                   <p className="text-sm font-bold text-navy">Carta de crédito</p>
-                  <p className="text-xs text-muted-foreground">Imóveis, veículos, motos e serviços</p>
+                  <p className="text-xs text-muted-foreground">
+                    Imóveis, veículos, motos e serviços
+                  </p>
                 </div>
               </div>
             </div>
@@ -316,9 +316,9 @@ function Index() {
         {/* ORIENTAÇÃO */}
         <section className="mx-auto max-w-6xl px-5 py-20 md:py-24">
           <div className="grid items-center gap-12 lg:grid-cols-[0.85fr_1.15fr]">
-            <div className="relative mx-auto w-full max-w-[480px]">
+            <div className="relative mx-auto w-full max-w-[430px]">
               <InstagramVideo />
-              <div className="glass-panel absolute -bottom-5 -right-3 flex items-center gap-3 rounded-2xl px-5 py-4 sm:right-5">
+              <div className="glass-panel absolute -right-2 top-16 hidden items-center gap-3 rounded-2xl px-5 py-4 shadow-card sm:flex">
                 <Instagram className="h-6 w-6 text-sky" />
                 <div>
                   <p className="text-sm font-bold text-navy">@g.r.u.p.o_invest</p>
@@ -643,4 +643,3 @@ function Index() {
     </div>
   );
 }
-
