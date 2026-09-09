@@ -1,13 +1,19 @@
-import { createFileRoute } from "@tanstack/react-router";
+﻿import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 import {
   Building2,
   CheckCircle2,
+  FileCheck2,
   HandCoins,
+  Instagram,
   KeyRound,
   MessageCircle,
   Phone,
+  RefreshCw,
   ShieldCheck,
   Sparkles,
+  Star,
+  SearchCheck,
   TrendingUp,
   UserRound,
 } from "lucide-react";
@@ -24,7 +30,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Empresa de crédito imobiliário e consórcio. Simule seu plano sem juros e fale com os gestores Luiz Ricardo e Talia Pinheiro.",
+          "Imóveis na planta, consórcios e investimentos em Belém. Simule seu plano e fale conosco.",
       },
       { property: "og:title", content: "Grupo Invest | Crédito Imobiliário e Consórcio" },
       {
@@ -38,12 +44,45 @@ export const Route = createFileRoute("/")({
 });
 
 const WHATSAPP = "https://wa.me/5500000000000";
+const INSTAGRAM = "https://www.instagram.com/g.r.u.p.o_invest/";
+const INSTAGRAM_POST = "https://www.instagram.com/p/DdE4LDxJfCQ/";
+
+function InstagramVideo() {
+  const [playerKey, setPlayerKey] = useState(0);
+
+  return (
+    <div className="overflow-hidden rounded-[2rem] border border-border bg-card shadow-soft">
+      <div className="relative h-[600px] bg-white sm:h-[680px]">
+        <iframe
+          key={playerKey}
+          src={`${INSTAGRAM_POST}embed/captioned/`}
+          title="Vídeo do Grupo Invest no Instagram"
+          loading="lazy"
+          className="absolute inset-0 h-full w-full border-0"
+          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+        />
+      </div>
+      <div className="flex flex-wrap items-center justify-between gap-3 border-t border-border bg-card px-5 py-4">
+        <p className="text-xs text-muted-foreground">O vídeo não reiniciou corretamente?</p>
+        <button
+          type="button"
+          onClick={() => setPlayerKey((key) => key + 1)}
+          className="inline-flex items-center gap-2 rounded-full bg-sky-soft px-4 py-2 text-xs font-bold text-navy transition-colors hover:bg-sky hover:text-primary-foreground"
+        >
+          <RefreshCw className="h-3.5 w-3.5" />
+          Reproduzir novamente
+        </button>
+      </div>
+    </div>
+  );
+}
 
 const beneficios = [
   {
     icon: HandCoins,
     titulo: "Sem juros",
-    texto: "Você paga apenas taxa de administração — nada de juros bancários corroendo seu patrimônio.",
+    texto:
+      "Você paga apenas taxa de administração — nada de juros bancários corroendo seu patrimônio.",
   },
   {
     icon: TrendingUp,
@@ -64,15 +103,13 @@ const beneficios = [
 
 const passos = [
   { n: "01", t: "Diagnóstico", d: "Entendemos seu objetivo, prazo e capacidade de investimento." },
-  { n: "02", t: "Plano ideal", d: "Selecionamos a carta de crédito e o grupo certo para o seu perfil." },
+  {
+    n: "02",
+    t: "Plano ideal",
+    d: "Selecionamos a carta de crédito e o grupo certo para o seu perfil.",
+  },
   { n: "03", t: "Estratégia de lance", d: "Montamos o caminho mais rápido até a contemplação." },
   { n: "04", t: "Chaves na mão", d: "Acompanhamos a compra do imóvel do início à escritura." },
-];
-
-const planos = [
-  { credito: "R$ 200 mil", parcela: "R$ 1.190", prazo: "200 meses" },
-  { credito: "R$ 350 mil", parcela: "R$ 2.080", prazo: "200 meses", destaque: true },
-  { credito: "R$ 500 mil", parcela: "R$ 2.970", prazo: "200 meses" },
 ];
 
 const faq = [
@@ -86,7 +123,7 @@ const faq = [
   },
   {
     q: "Posso usar o FGTS?",
-    a: "Sim. O FGTS pode ser usado para dar lance, complementar a carta de crédito ou amortizar parcelas, conforme as regras vigentes.",
+    a: "O uso do FGTS depende da modalidade, do bem escolhido e das regras vigentes. Nossa equipe analisa seu objetivo e orienta sobre as possibilidades disponíveis.",
   },
   {
     q: "Em quanto tempo sou contemplado?",
@@ -112,11 +149,24 @@ function Index() {
             </span>
           </a>
           <nav className="hidden items-center gap-7 text-sm font-medium text-muted-foreground md:flex">
-            <a className="transition-colors hover:text-navy" href="#vantagens">Vantagens</a>
-            <a className="transition-colors hover:text-navy" href="#como-funciona">Como funciona</a>
-            <a className="transition-colors hover:text-navy" href="#simulador">Simulador</a>
-            <a className="transition-colors hover:text-navy" href="#planos">Planos</a>
-            <a className="transition-colors hover:text-navy" href="#gestores">Gestores</a>
+            <a className="transition-colors hover:text-navy" href="#vantagens">
+              Vantagens
+            </a>
+            <a className="transition-colors hover:text-navy" href="#como-funciona">
+              Como funciona
+            </a>
+            <a className="transition-colors hover:text-navy" href="#simulador">
+              Simulador
+            </a>
+            <a className="transition-colors hover:text-navy" href="#sobre-nos">
+              Sobre nós
+            </a>
+            <a className="transition-colors hover:text-navy" href="#avaliacoes">
+              Avaliações
+            </a>
+            <a className="transition-colors hover:text-navy" href="#instagram">
+              Instagram
+            </a>
           </nav>
           <a
             href={WHATSAPP}
@@ -151,7 +201,7 @@ function Index() {
                   className="inline-flex items-center gap-2 rounded-full bg-sky px-7 py-3.5 text-sm font-bold text-primary-foreground shadow-soft transition-transform hover:scale-[1.03]"
                 >
                   <MessageCircle className="h-4 w-4" />
-                  Falar com um gestor
+                  Fale conosco
                 </a>
                 <a
                   href="#simulador"
@@ -168,7 +218,9 @@ function Index() {
                 ].map(([k, v]) => (
                   <div key={v}>
                     <dt className="text-2xl font-extrabold text-sky sm:text-3xl">{k}</dt>
-                    <dd className="mt-1 text-xs uppercase tracking-wider text-primary-foreground/65">{v}</dd>
+                    <dd className="mt-1 text-xs uppercase tracking-wider text-primary-foreground/65">
+                      {v}
+                    </dd>
                   </div>
                 ))}
               </dl>
@@ -188,7 +240,7 @@ function Index() {
                 <Building2 className="h-9 w-9 text-sky" />
                 <div>
                   <p className="text-sm font-bold text-navy">Carta de crédito</p>
-                  <p className="text-xs text-muted-foreground">Casa, apartamento, terreno ou reforma</p>
+                  <p className="text-xs text-muted-foreground">Imóveis, veículos, motos e serviços</p>
                 </div>
               </div>
             </div>
@@ -198,20 +250,20 @@ function Index() {
         {/* VANTAGENS */}
         <section id="vantagens" className="mx-auto max-w-6xl px-5 py-20 md:py-24">
           <div className="max-w-2xl">
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-sky">Por que consórcio</p>
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-sky">
+              Por que consórcio
+            </p>
             <h2 className="mt-3 text-3xl font-bold tracking-tight text-navy sm:text-4xl">
               A forma mais inteligente de comprar um imóvel
             </h2>
             <p className="mt-4 text-muted-foreground">
-              Enquanto o financiamento cobra juros por décadas, o consórcio transforma sua parcela em patrimônio.
+              Enquanto o financiamento cobra juros por décadas, o consórcio transforma sua parcela
+              em patrimônio.
             </p>
           </div>
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {beneficios.map(({ icon: Icon, titulo, texto }) => (
-              <article
-                key={titulo}
-                className="glass-card rounded-2xl p-7"
-              >
+              <article key={titulo} className="glass-card rounded-2xl p-7">
                 <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-sky-soft text-navy">
                   <Icon className="h-6 w-6" />
                 </span>
@@ -244,12 +296,15 @@ function Index() {
         <section id="simulador" className="bg-sky-soft/40 py-20 md:py-24">
           <div className="mx-auto max-w-6xl px-5">
             <div className="max-w-2xl">
-              <p className="text-xs font-bold uppercase tracking-[0.22em] text-sky">Simulador online</p>
+              <p className="text-xs font-bold uppercase tracking-[0.22em] text-sky">
+                Simulador online
+              </p>
               <h2 className="mt-3 text-3xl font-bold tracking-tight text-navy sm:text-4xl">
                 Descubra sua parcela agora mesmo
               </h2>
               <p className="mt-4 text-muted-foreground">
-                Escolha a categoria, o valor do crédito e o prazo. O cálculo é instantâneo e sem compromisso.
+                Escolha a categoria, o valor do crédito e o prazo do seu plano. O cálculo é
+                instantâneo e sem compromisso.
               </p>
             </div>
             <div className="mt-12">
@@ -258,84 +313,82 @@ function Index() {
           </div>
         </section>
 
-        {/* PLANOS */}
-        <section id="planos" className="mx-auto max-w-6xl px-5 py-20 md:py-24">
-          <div className="max-w-2xl">
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-sky">Simulações</p>
-            <h2 className="mt-3 text-3xl font-bold tracking-tight text-navy sm:text-4xl">
-              Escolha o crédito e comece hoje
-            </h2>
-            <p className="mt-4 text-muted-foreground">
-              Valores de referência. A proposta exata é montada gratuitamente pelos nossos gestores.
-            </p>
-          </div>
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {planos.map((p) => (
-              <div
-                key={p.credito}
-                className={
-                  p.destaque
-                    ? "rounded-3xl bg-brand-gradient p-8 shadow-soft"
-                    : "glass-card rounded-3xl p-8"
-                }
-              >
-                <p
-                  className={
-                    p.destaque
-                      ? "text-xs font-semibold uppercase tracking-[0.2em] text-sky"
-                      : "text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground"
-                  }
-                >
-                  Crédito
-                </p>
-                <p
-                  className={
-                    p.destaque
-                      ? "mt-2 text-3xl font-extrabold text-primary-foreground"
-                      : "mt-2 text-3xl font-extrabold text-navy"
-                  }
-                >
-                  {p.credito}
-                </p>
-                <p className={p.destaque ? "mt-6 text-primary-foreground/80" : "mt-6 text-muted-foreground"}>
-                  a partir de{" "}
-                  <strong className={p.destaque ? "text-sky" : "text-navy"}>{p.parcela}</strong> /mês
-                </p>
-                <p className={p.destaque ? "mt-1 text-sm text-primary-foreground/65" : "mt-1 text-sm text-muted-foreground"}>
-                  em até {p.prazo}
-                </p>
-                <ul className="mt-6 space-y-2">
-                  {["Sem juros", "Sem entrada", "Uso do FGTS permitido"].map((i) => (
-                    <li
-                      key={i}
-                      className={
-                        p.destaque
-                          ? "flex items-center gap-2 text-sm text-primary-foreground/85"
-                          : "flex items-center gap-2 text-sm text-muted-foreground"
-                      }
-                    >
-                      <CheckCircle2 className="h-4 w-4 text-sky" />
-                      {i}
-                    </li>
-                  ))}
-                </ul>
+        {/* ORIENTAÇÃO */}
+        <section className="mx-auto max-w-6xl px-5 py-20 md:py-24">
+          <div className="grid items-center gap-12 lg:grid-cols-[0.85fr_1.15fr]">
+            <div className="relative mx-auto w-full max-w-[480px]">
+              <InstagramVideo />
+              <div className="glass-panel absolute -bottom-5 -right-3 flex items-center gap-3 rounded-2xl px-5 py-4 sm:right-5">
+                <Instagram className="h-6 w-6 text-sky" />
+                <div>
+                  <p className="text-sm font-bold text-navy">@g.r.u.p.o_invest</p>
+                  <p className="text-xs text-muted-foreground">Conteúdo e oportunidades</p>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.22em] text-sky">
+                O primeiro passo
+              </p>
+              <h2 className="mt-3 text-3xl font-bold tracking-tight text-navy sm:text-4xl lg:text-5xl">
+                Comprar seu apartamento pode ser mais simples do que você imagina!
+              </h2>
+              <p className="mt-6 leading-relaxed text-muted-foreground">
+                Antes de escolher o imóvel, é importante entender se você está pronto para o
+                financiamento, quais documentos serão necessários e como funciona a análise de
+                crédito. E você não precisa fazer isso sozinho.
+              </p>
+              <p className="mt-4 leading-relaxed text-muted-foreground">
+                Na Grupo Invest, você conta com orientação em cada etapa para encontrar a melhor
+                opção de acordo com a sua realidade.
+              </p>
+
+              <div className="mt-8 grid gap-4 sm:grid-cols-3">
+                {[
+                  {
+                    icon: SearchCheck,
+                    titulo: "Análise",
+                    texto: "Entenda seu momento financeiro.",
+                  },
+                  { icon: FileCheck2, titulo: "Documentos", texto: "Saiba tudo o que preparar." },
+                  { icon: KeyRound, titulo: "Escolha", texto: "Encontre a opção ideal para você." },
+                ].map(({ icon: Icon, titulo, texto }) => (
+                  <article key={titulo} className="glass-card rounded-2xl p-5">
+                    <Icon className="h-6 w-6 text-sky" />
+                    <h3 className="mt-3 font-bold text-navy">{titulo}</h3>
+                    <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{texto}</p>
+                  </article>
+                ))}
+              </div>
+
+              <p className="mt-8 text-lg font-bold text-navy">
+                Seu apartamento começa com uma boa orientação.
+              </p>
+              <div className="mt-6 flex flex-wrap gap-3">
                 <a
                   href={WHATSAPP}
-                  className={
-                    p.destaque
-                      ? "mt-8 inline-flex w-full items-center justify-center rounded-full bg-sky px-6 py-3 text-sm font-bold text-primary-foreground"
-                      : "mt-8 inline-flex w-full items-center justify-center rounded-full bg-navy px-6 py-3 text-sm font-bold text-primary-foreground"
-                  }
+                  className="inline-flex items-center gap-2 rounded-full bg-navy px-7 py-3.5 text-sm font-bold text-primary-foreground transition-transform hover:scale-[1.03]"
                 >
-                  Quero simular
+                  <MessageCircle className="h-4 w-4" />
+                  Fale com a Grupo Invest
+                </a>
+                <a
+                  href={INSTAGRAM_POST}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-border px-7 py-3.5 text-sm font-bold text-navy transition-colors hover:border-sky hover:text-sky"
+                >
+                  <Instagram className="h-4 w-4" />
+                  Ver no Instagram
                 </a>
               </div>
-            ))}
+            </div>
           </div>
         </section>
 
-        {/* GESTORES */}
-        <section id="gestores" className="liquid-dark-section bg-navy-deep py-20 md:py-24">
+        {/* SOBRE NÓS */}
+        <section id="sobre-nos" className="liquid-dark-section bg-navy-deep py-20 md:py-24">
           <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 lg:grid-cols-[1fr_1fr]">
             <div className="relative">
               <img
@@ -352,15 +405,30 @@ function Index() {
               </div>
             </div>
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.22em] text-sky">Quem conduz o seu plano</p>
+              <p className="text-xs font-bold uppercase tracking-[0.22em] text-sky">Sobre nós</p>
               <h2 className="mt-3 text-3xl font-bold tracking-tight text-primary-foreground sm:text-4xl">
-                Uma gestão feita a quatro mãos
+                Transformamos oportunidades em patrimônio
               </h2>
               <p className="mt-5 leading-relaxed text-primary-foreground/75">
-                O Grupo Invest é conduzido por Luiz Ricardo e Talia Pinheiro. Juntos, eles unem estratégia
-                financeira e atendimento próximo para que cada cliente saia do aluguel com clareza — sem
-                promessas irreais e sem letras miúdas.
+                Há mais de 5 anos no mercado de Belém, o Grupo Invest conecta pessoas a
+                oportunidades imobiliárias com estratégia, transparência e atendimento próximo. Já
+                são mais de R$ 745 milhões em créditos, transformando planos em patrimônio.
               </p>
+
+              <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3">
+                {[
+                  ["+5 anos", "de mercado | Belém, PA"],
+                  ["+R$ 745 mi", "em créditos"],
+                  ["Soluções", "Imóveis • Consórcios • Investimentos"],
+                ].map(([valor, legenda]) => (
+                  <div key={legenda} className="glass-card-dark rounded-2xl p-4">
+                    <p className="text-lg font-extrabold text-sky">{valor}</p>
+                    <p className="mt-1 text-xs leading-relaxed text-primary-foreground/70">
+                      {legenda}
+                    </p>
+                  </div>
+                ))}
+              </div>
 
               <div className="mt-9 grid gap-4 sm:grid-cols-2">
                 {[
@@ -375,16 +443,17 @@ function Index() {
                     bio: "Acompanha cada cliente do primeiro cálculo à escritura, com transparência total.",
                   },
                 ].map((g) => (
-                  <article
-                    key={g.nome}
-                    className="glass-card-dark rounded-2xl p-6"
-                  >
+                  <article key={g.nome} className="glass-card-dark rounded-2xl p-6">
                     <span className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-sky/20 text-sky">
                       <UserRound className="h-5 w-5" />
                     </span>
                     <h3 className="mt-4 text-lg font-bold text-primary-foreground">{g.nome}</h3>
-                    <p className="text-xs font-semibold uppercase tracking-wider text-sky">{g.cargo}</p>
-                    <p className="mt-3 text-sm leading-relaxed text-primary-foreground/70">{g.bio}</p>
+                    <p className="text-xs font-semibold uppercase tracking-wider text-sky">
+                      {g.cargo}
+                    </p>
+                    <p className="mt-3 text-sm leading-relaxed text-primary-foreground/70">
+                      {g.bio}
+                    </p>
                   </article>
                 ))}
               </div>
@@ -396,7 +465,10 @@ function Index() {
                   "Transparência em cada taxa",
                   "Suporte após a contemplação",
                 ].map((i) => (
-                  <li key={i} className="flex items-center gap-2 text-sm text-primary-foreground/85">
+                  <li
+                    key={i}
+                    className="flex items-center gap-2 text-sm text-primary-foreground/85"
+                  >
                     <CheckCircle2 className="h-4 w-4 shrink-0 text-sky" />
                     {i}
                   </li>
@@ -407,7 +479,99 @@ function Index() {
                 className="mt-9 inline-flex items-center gap-2 rounded-full bg-sky px-7 py-3.5 text-sm font-bold text-primary-foreground transition-transform hover:scale-[1.03]"
               >
                 <Phone className="h-4 w-4" />
-                Falar com os gestores
+                Fale conosco
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* AVALIAÇÕES */}
+        <section id="avaliacoes" className="mx-auto max-w-6xl px-5 py-20 md:py-24">
+          <div className="max-w-2xl">
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-sky">Avaliações</p>
+            <h2 className="mt-3 text-3xl font-bold tracking-tight text-navy sm:text-4xl">
+              A confiança de quem planeja com a gente
+            </h2>
+          </div>
+          <div className="mt-12 grid gap-5 md:grid-cols-3">
+            {[
+              {
+                nome: "Camila S.",
+                texto:
+                  "Atendimento muito claro e atencioso. Entendi cada etapa e consegui escolher com mais segurança.",
+              },
+              {
+                nome: "Rafael M.",
+                texto:
+                  "A equipe foi transparente desde a primeira conversa e montou uma estratégia alinhada ao meu momento.",
+              },
+              {
+                nome: "Juliana A.",
+                texto:
+                  "Gostei do acompanhamento próximo e da agilidade para tirar todas as minhas dúvidas.",
+              },
+            ].map((avaliacao) => (
+              <article key={avaliacao.nome} className="glass-card rounded-2xl p-7">
+                <div className="flex gap-1 text-sky" aria-label="5 de 5 estrelas">
+                  {Array.from({ length: 5 }).map((_, index) => (
+                    <Star key={index} className="h-4 w-4 fill-current" />
+                  ))}
+                </div>
+                <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
+                  “{avaliacao.texto}”
+                </p>
+                <p className="mt-5 font-bold text-navy">{avaliacao.nome}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        {/* INSTAGRAM */}
+        <section id="instagram" className="bg-sky-soft/50 py-20 md:py-24">
+          <div className="mx-auto max-w-6xl px-5">
+            <div className="text-center">
+              <span className="inline-flex items-center gap-2 rounded-full bg-sky/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-sky">
+                <Instagram className="h-4 w-4" />
+                Instagram
+              </span>
+              <h2 className="mt-5 text-3xl font-extrabold tracking-tight text-navy sm:text-5xl">
+                Siga a Grupo Invest no Instagram
+              </h2>
+              <p className="mx-auto mt-4 max-w-xl leading-relaxed text-muted-foreground">
+                Dicas sobre imóveis, consórcios, investimentos e conteúdos para ajudar você a
+                construir seu patrimônio.
+              </p>
+            </div>
+
+            <div className="glass-panel mt-12 flex flex-col items-center gap-6 rounded-3xl border border-border p-6 shadow-card sm:flex-row sm:justify-between sm:p-8">
+              <div className="flex items-center gap-4 text-center sm:text-left">
+                <div className="rounded-full bg-gradient-to-br from-fuchsia-500 via-rose-500 to-amber-400 p-[3px]">
+                  <div className="flex h-16 w-16 items-center justify-center rounded-full bg-background p-1">
+                    <img
+                      src={logoAsset}
+                      alt="Grupo Invest no Instagram"
+                      loading="lazy"
+                      width={56}
+                      height={56}
+                      className="h-14 w-14 rounded-full object-cover"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <p className="text-lg font-extrabold text-navy">@g.r.u.p.o_invest</p>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    Imóveis • Consórcios • Investimentos | Belém, PA
+                  </p>
+                </div>
+              </div>
+              <a
+                href={INSTAGRAM}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex shrink-0 items-center gap-2 rounded-full bg-gradient-to-r from-fuchsia-600 via-rose-600 to-orange-500 px-7 py-3.5 text-sm font-bold text-white shadow-soft transition-transform hover:scale-[1.03]"
+              >
+                <Instagram className="h-4 w-4" />
+                Seguir no Instagram
               </a>
             </div>
           </div>
@@ -415,7 +579,9 @@ function Index() {
 
         {/* FAQ */}
         <section className="mx-auto max-w-4xl px-5 py-20 md:py-24">
-          <h2 className="text-3xl font-bold tracking-tight text-navy sm:text-4xl">Dúvidas frequentes</h2>
+          <h2 className="text-3xl font-bold tracking-tight text-navy sm:text-4xl">
+            Dúvidas frequentes
+          </h2>
           <div className="glass-panel mt-10 divide-y divide-border rounded-3xl px-6">
             {faq.map((f) => (
               <details key={f.q} className="group py-5">
@@ -436,7 +602,8 @@ function Index() {
               O próximo endereço da sua família começa aqui
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-primary-foreground/80">
-              Simulação gratuita e sem compromisso. Responda algumas perguntas e receba seu plano ideal hoje mesmo.
+              Simulação gratuita e sem compromisso. Responda algumas perguntas e receba seu plano
+              ideal hoje mesmo.
             </p>
             <a
               href={WHATSAPP}
@@ -468,11 +635,12 @@ function Index() {
             </p>
           </div>
           <p className="text-xs text-muted-foreground">
-            © {new Date().getFullYear()} Grupo Invest. Consórcio não é financiamento — administradoras
-            autorizadas pelo Banco Central.
+            © {new Date().getFullYear()} Grupo Invest. Consórcio não é financiamento —
+            administradoras autorizadas pelo Banco Central.
           </p>
         </div>
       </footer>
     </div>
   );
 }
+

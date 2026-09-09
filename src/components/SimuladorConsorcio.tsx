@@ -1,5 +1,5 @@
-import { useMemo, useState } from "react";
-import { Building2, Car, MessageCircle, Truck } from "lucide-react";
+﻿import { useMemo, useState } from "react";
+import { Bike, Building2, Car, MessageCircle, Wrench } from "lucide-react";
 
 type Categoria = {
   id: string;
@@ -11,6 +11,8 @@ type Categoria = {
   prazos: number[];
   taxaAdm: number;
   fundoReserva: number;
+  inicial: number;
+  prazoInicial: number;
 };
 
 const CATEGORIAS: Categoria[] = [
@@ -24,28 +26,47 @@ const CATEGORIAS: Categoria[] = [
     prazos: [120, 150, 180, 200, 240],
     taxaAdm: 0.19,
     fundoReserva: 0.02,
+    inicial: 350000,
+    prazoInicial: 200,
   },
   {
-    id: "auto",
+    id: "automovel",
     nome: "Automóvel",
     icon: Car,
     min: 30000,
-    max: 300000,
+    max: 500000,
     step: 5000,
-    prazos: [48, 60, 72, 80, 100],
-    taxaAdm: 0.17,
+    prazos: [36, 48, 60, 72, 84, 100],
+    taxaAdm: 0.16,
     fundoReserva: 0.02,
+    inicial: 100000,
+    prazoInicial: 72,
   },
   {
-    id: "pesados",
-    nome: "Pesados",
-    icon: Truck,
-    min: 80000,
-    max: 800000,
-    step: 10000,
-    prazos: [60, 80, 100, 120, 150],
+    id: "moto",
+    nome: "Moto",
+    icon: Bike,
+    min: 10000,
+    max: 150000,
+    step: 2500,
+    prazos: [24, 36, 48, 60, 72],
+    taxaAdm: 0.15,
+    fundoReserva: 0.02,
+    inicial: 30000,
+    prazoInicial: 48,
+  },
+  {
+    id: "servicos",
+    nome: "Serviços",
+    icon: Wrench,
+    min: 10000,
+    max: 200000,
+    step: 5000,
+    prazos: [24, 36, 48, 60],
     taxaAdm: 0.18,
     fundoReserva: 0.02,
+    inicial: 50000,
+    prazoInicial: 48,
   },
 ];
 
@@ -53,10 +74,16 @@ const brl = (v: number) =>
   v.toLocaleString("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 });
 
 export function SimuladorConsorcio({ whatsapp }: { whatsapp: string }) {
-  const [catId, setCatId] = useState(CATEGORIAS[0]!.id);
-  const categoria = CATEGORIAS.find((c) => c.id === catId)!;
+  const [categoriaId, setCategoriaId] = useState(CATEGORIAS[0]!.id);
+  const categoria = CATEGORIAS.find(({ id }) => id === categoriaId) ?? CATEGORIAS[0]!;
   const [credito, setCredito] = useState(350000);
   const [prazo, setPrazo] = useState(200);
+
+  const selecionarCategoria = (novaCategoria: Categoria) => {
+    setCategoriaId(novaCategoria.id);
+    setCredito(novaCategoria.inicial);
+    setPrazo(novaCategoria.prazoInicial);
+  };
 
   const valorCredito = Math.min(Math.max(credito, categoria.min), categoria.max);
   const prazoAtual = categoria.prazos.includes(prazo)
@@ -72,12 +99,6 @@ export function SimuladorConsorcio({ whatsapp }: { whatsapp: string }) {
     };
   }, [valorCredito, prazoAtual, categoria]);
 
-  const trocarCategoria = (c: Categoria) => {
-    setCatId(c.id);
-    setCredito(Math.round((c.min + c.max) / 2 / c.step) * c.step);
-    setPrazo(c.prazos[c.prazos.length - 1] as number);
-  };
-
   const mensagem = `${whatsapp}?text=${encodeURIComponent(
     `Olá! Simulei um consórcio de ${categoria.nome.toLowerCase()} de ${brl(valorCredito)} em ${prazoAtual} meses (parcela aprox. ${brl(parcela)}). Quero receber a proposta completa.`,
   )}`;
@@ -90,26 +111,31 @@ export function SimuladorConsorcio({ whatsapp }: { whatsapp: string }) {
           Monte seu plano em segundos
         </h3>
 
-        <div className="mt-7 grid grid-cols-3 gap-2 rounded-2xl bg-sky-soft p-1.5">
-          {CATEGORIAS.map((c) => {
-            const Icon = c.icon;
-            const ativo = c.id === catId;
-            return (
-              <button
-                key={c.id}
-                type="button"
-                onClick={() => trocarCategoria(c)}
-                className={
-                  ativo
-                    ? "flex items-center justify-center gap-2 rounded-xl bg-navy px-3 py-2.5 text-xs font-bold text-primary-foreground sm:text-sm"
-                    : "flex items-center justify-center gap-2 rounded-xl px-3 py-2.5 text-xs font-semibold text-navy/70 transition-colors hover:bg-background/70 sm:text-sm"
-                }
-              >
-                <Icon className="h-4 w-4" />
-                {c.nome}
-              </button>
-            );
-          })}
+        <div className="mt-7">
+          <p className="text-sm font-semibold text-navy">O que você quer conquistar?</p>
+          <div className="mt-3 flex flex-wrap gap-2" role="group" aria-label="Categoria do consórcio">
+            {CATEGORIAS.map((item) => {
+              const Icon = item.icon;
+              const ativa = item.id === categoria.id;
+
+              return (
+                <button
+                  key={item.id}
+                  type="button"
+                  aria-pressed={ativa}
+                  onClick={() => selecionarCategoria(item)}
+                  className={
+                    ativa
+                      ? "inline-flex items-center gap-2 rounded-xl bg-navy px-4 py-2.5 text-sm font-bold text-primary-foreground"
+                      : "inline-flex items-center gap-2 rounded-xl border border-border px-4 py-2.5 text-sm font-semibold text-navy transition-colors hover:border-sky hover:text-sky"
+                  }
+                >
+                  <Icon className="h-4 w-4" />
+                  {item.nome}
+                </button>
+              );
+            })}
+          </div>
         </div>
 
         <div className="mt-8">
@@ -158,7 +184,9 @@ export function SimuladorConsorcio({ whatsapp }: { whatsapp: string }) {
 
       <div className="flex flex-col justify-between rounded-[1.5rem] bg-brand-gradient p-7 shadow-soft">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky">Parcela estimada</p>
+          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-sky">
+            Parcela estimada
+          </p>
           <p className="mt-2 text-4xl font-extrabold leading-none text-primary-foreground">
             {brl(parcela)}
           </p>
@@ -206,3 +234,4 @@ export function SimuladorConsorcio({ whatsapp }: { whatsapp: string }) {
     </div>
   );
 }
+
