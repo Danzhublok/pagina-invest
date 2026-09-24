@@ -4,6 +4,8 @@ import { useState } from "react";
 import {
   Building2,
   CheckCircle2,
+  ChevronLeft,
+  ChevronRight,
   FileCheck2,
   HandCoins,
   Instagram,
@@ -23,6 +25,10 @@ import {
 import logoAsset from "@/assets/grupo-invest-logo.jpg";
 import gestoresAsset from "@/assets/gestores.png";
 import heroImovel from "@/assets/hero-imovel.jpeg";
+import carousel1 from "@/assets/grupo-invest-carousel-1.jpg";
+import carousel2 from "@/assets/grupo-invest-carousel-2.jpg";
+import carousel3 from "@/assets/grupo-invest-carousel-3.jpg";
+import carousel4 from "@/assets/grupo-invest-carousel-4.jpg";
 import { SimuladorConsorcio } from "@/components/SimuladorConsorcio";
 
 export const Route = createFileRoute("/")({
@@ -49,6 +55,8 @@ const WHATSAPP = "https://wa.me/5500000000000";
 const INSTAGRAM = "https://www.instagram.com/g.r.u.p.o_invest/";
 const INSTAGRAM_POST = "https://www.instagram.com/p/DdKECuYJSq3/";
 
+const carouselPost = "https://www.instagram.com/p/DdE4WFBici1/?img_index=4";
+const carouselSlides = [carousel1, carousel2, carousel3, carousel4];
 const instagramVideos = [
   {
     id: "estrategia",
@@ -67,15 +75,6 @@ const instagramVideos = [
     title: "Planejamento que sai do papel",
     description:
       "Uma visão prática sobre crédito, consórcio e construção de patrimônio para quem quer avançar com clareza.",
-  },
-  {
-    id: "consultoria",
-    label: "Carrossel",
-    url: "https://www.instagram.com/p/DdE4WFBici1/?img_index=4",
-    eyebrow: "Atendimento consultivo",
-    title: "Seu sonho merece planejamento",
-    description:
-      "Especialistas em consórcio e crédito, com uma equipe preparada para encontrar a melhor solução para cada cliente — sem fórmulas prontas.",
   },
 ];
 
@@ -117,6 +116,86 @@ function InstagramVideo({
   );
 }
 
+function NativeCarousel() {
+  const [activeSlide, setActiveSlide] = useState(0);
+  const lastSlide = carouselSlides.length - 1;
+  const previous = () => setActiveSlide((current) => (current === 0 ? lastSlide : current - 1));
+  const next = () => setActiveSlide((current) => (current === lastSlide ? 0 : current + 1));
+
+  return (
+    <div className="mt-12 grid items-center gap-10 rounded-[2rem] bg-navy-deep p-5 shadow-soft sm:p-8 lg:grid-cols-[0.85fr_1.15fr] lg:p-10">
+      <div className="relative mx-auto w-full max-w-[440px] overflow-hidden rounded-[1.75rem] bg-sky-soft shadow-card">
+        <img
+          src={carouselSlides[activeSlide]}
+          alt={`Carrossel Grupo Invest — página ${activeSlide + 1} de ${carouselSlides.length}`}
+          className="aspect-[3/4] w-full object-cover"
+          width={1080}
+          height={1440}
+        />
+        <button
+          type="button"
+          onClick={previous}
+          aria-label="Slide anterior"
+          className="absolute left-3 top-1/2 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-background/90 text-navy shadow-card transition-transform hover:scale-105"
+        >
+          <ChevronLeft className="h-5 w-5" />
+        </button>
+        <button
+          type="button"
+          onClick={next}
+          aria-label="Próximo slide"
+          className="absolute right-3 top-1/2 inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-background/90 text-navy shadow-card transition-transform hover:scale-105"
+        >
+          <ChevronRight className="h-5 w-5" />
+        </button>
+        <div
+          className="absolute bottom-4 left-1/2 flex -translate-x-1/2 gap-2 rounded-full bg-navy-deep/70 px-3 py-2"
+          aria-label={`Página ${activeSlide + 1} de ${carouselSlides.length}`}
+        >
+          {carouselSlides.map((_, index) => (
+            <button
+              key={index}
+              type="button"
+              onClick={() => setActiveSlide(index)}
+              aria-label={`Ir para o slide ${index + 1}`}
+              className={`h-2 rounded-full transition-all ${activeSlide === index ? "w-6 bg-sky" : "w-2 bg-primary-foreground/60"}`}
+            />
+          ))}
+        </div>
+      </div>
+      <div className="px-2 py-4 sm:px-4">
+        <p className="text-xs font-bold uppercase tracking-[0.22em] text-sky">
+          Por que escolher a Grupo Invest
+        </p>
+        <h3 className="mt-4 text-3xl font-extrabold tracking-tight text-primary-foreground sm:text-4xl">
+          Seu sonho merece planejamento
+        </h3>
+        <p className="mt-5 max-w-xl leading-relaxed text-primary-foreground/75">
+          Especialistas em consórcio e crédito, com atendimento consultivo do início ao fim e uma
+          equipe preparada para encontrar a melhor solução para cada cliente — sem fórmulas prontas.
+        </p>
+        <div className="mt-7 flex flex-wrap gap-2 text-sm font-semibold text-primary-foreground/80">
+          {["Especialistas", "Atendimento consultivo", "Solução personalizada"].map((item) => (
+            <span
+              key={item}
+              className="rounded-full border border-primary-foreground/20 bg-primary-foreground/10 px-4 py-2"
+            >
+              {item}
+            </span>
+          ))}
+        </div>
+        <a
+          href={carouselPost}
+          target="_blank"
+          rel="noreferrer"
+          className="mt-8 inline-flex items-center gap-2 text-sm font-bold text-sky transition-colors hover:text-primary-foreground"
+        >
+          Ver publicação original <ExternalLink className="h-4 w-4" />
+        </a>
+      </div>
+    </div>
+  );
+}
 function InstagramShowcase() {
   const [activeId, setActiveId] = useState(instagramVideos[0].id);
   const activeVideo = instagramVideos.find((video) => video.id === activeId) ?? instagramVideos[0];
@@ -647,7 +726,13 @@ function Index() {
                 caminhos claros para construir patrimônio.
               </p>
             </div>
-            <InstagramShowcase />
+            <NativeCarousel />
+            <div className="mt-20 border-t border-border pt-16">
+              <p className="text-xs font-bold uppercase tracking-[0.22em] text-sky">
+                Mais conteúdos em vídeo
+              </p>
+              <InstagramShowcase />
+            </div>
             <div className="glass-panel mt-12 flex flex-col items-center gap-6 rounded-3xl border border-border p-6 shadow-card sm:flex-row sm:justify-between sm:p-8">
               <div className="flex items-center gap-4 text-center sm:text-left">
                 <div className="rounded-full bg-gradient-to-br from-fuchsia-500 via-rose-500 to-amber-400 p-[3px]">
