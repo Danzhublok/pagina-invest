@@ -99,8 +99,18 @@ export function SimuladorConsorcio({ whatsapp }: { whatsapp: string }) {
     };
   }, [valorCredito, prazoAtual, categoria]);
 
-  const mensagem = `${whatsapp}?text=${encodeURIComponent(
-    `Olá! Simulei um consórcio de ${categoria.nome.toLowerCase()} de ${brl(valorCredito)} em ${prazoAtual} meses (parcela aprox. ${brl(parcela)}). Quero receber a proposta completa.`,
+  const whatsappBase = whatsapp.split("?")[0];
+  const mensagem = `${whatsappBase}?text=${encodeURIComponent(
+    [
+      "Olá! Vim pelo site do Grupo Invest e fiz uma simulação:",
+      `Categoria: ${categoria.nome}`,
+      `Crédito: ${brl(valorCredito)}`,
+      `Prazo: ${prazoAtual} meses`,
+      `Parcela estimada: ${brl(parcela)}`,
+      `Taxa administrativa: ${(categoria.taxaAdm * 100).toFixed(0)}%`,
+      `Total estimado: ${brl(total)}`,
+      "Gostaria de receber a proposta completa.",
+    ].join("\n"),
   )}`;
 
   return (
@@ -225,13 +235,15 @@ export function SimuladorConsorcio({ whatsapp }: { whatsapp: string }) {
         <div className="mt-8">
           <a
             href={mensagem}
+            target="_blank"
+            rel="noreferrer"
             className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-sky px-6 py-3.5 text-sm font-bold text-primary-foreground transition-transform hover:scale-[1.02]"
           >
             <MessageCircle className="h-4 w-4" />
             Receber proposta completa
           </a>
           <p className="mt-3 text-center text-[11px] leading-relaxed text-primary-foreground/60">
-            Valores simulados para referência. A proposta oficial é enviada pela nossa equipe.
+            Atendimento pelo WhatsApp +55 91 8274-6364. Valores simulados para referência.
           </p>
         </div>
       </div>
