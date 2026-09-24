@@ -433,24 +433,23 @@ function Index() {
 
               <div className="relative min-h-[500px] sm:min-h-[600px]">
                 <div className="hero-glow absolute inset-14 rounded-full bg-sky/20 blur-3xl" />
-                <div className="hero-chart-shell absolute inset-x-0 bottom-10 top-5 overflow-hidden rounded-[2rem] border border-primary-foreground/10 bg-primary-foreground/[0.035]">
-                  <div className="absolute inset-0 bg-[linear-gradient(to_right,transparent_24%,rgba(255,255,255,0.07)_25%,transparent_26%),linear-gradient(to_bottom,transparent_24%,rgba(255,255,255,0.07)_25%,transparent_26%)] bg-[size:25%_25%]" />
-                  <svg
-                    viewBox="0 0 700 560"
-                    className="absolute inset-0 h-full w-full"
-                    aria-hidden="true"
-                  >
+                <div
+                  className="hero-growth-visual absolute -inset-x-8 bottom-3 top-6"
+                  aria-hidden="true"
+                >
+                  <svg viewBox="0 0 760 610" className="h-full w-full overflow-visible">
                     <defs>
-                      <linearGradient id="chartArea" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="oklch(0.82 0.15 225)" stopOpacity="0.48" />
-                        <stop offset="100%" stopColor="oklch(0.82 0.15 225)" stopOpacity="0" />
+                      <linearGradient id="growthStroke" x1="0" y1="1" x2="1" y2="0">
+                        <stop offset="0%" stopColor="oklch(0.72 0.15 245)" stopOpacity="0.2" />
+                        <stop offset="52%" stopColor="oklch(0.78 0.17 230)" />
+                        <stop offset="100%" stopColor="oklch(0.92 0.16 195)" />
                       </linearGradient>
-                      <linearGradient id="chartLine" x1="0" y1="0" x2="1" y2="0">
-                        <stop offset="0%" stopColor="oklch(0.72 0.15 245)" />
-                        <stop offset="100%" stopColor="oklch(0.9 0.16 205)" />
+                      <linearGradient id="growthFill" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="oklch(0.84 0.14 215)" stopOpacity="0.3" />
+                        <stop offset="100%" stopColor="oklch(0.72 0.15 245)" stopOpacity="0" />
                       </linearGradient>
-                      <filter id="lineGlow">
-                        <feGaussianBlur stdDeviation="6" result="blur" />
+                      <filter id="growthGlow">
+                        <feGaussianBlur stdDeviation="7" result="blur" />
                         <feMerge>
                           <feMergeNode in="blur" />
                           <feMergeNode in="SourceGraphic" />
@@ -458,50 +457,67 @@ function Index() {
                       </filter>
                     </defs>
                     <path
-                      d="M22 485 C105 470 120 420 188 430 S280 360 345 370 S442 280 500 290 S600 165 675 72 L675 535 L22 535 Z"
-                      fill="url(#chartArea)"
+                      d="M15 545 C105 530 120 485 195 475 C285 462 302 385 372 370 C470 348 475 252 548 220 C645 178 656 94 735 42 L735 605 L15 605 Z"
+                      fill="url(#growthFill)"
+                    />
+                    <path
+                      className="hero-chart-ghost"
+                      d="M15 545 C105 530 120 485 195 475 C285 462 302 385 372 370 C470 348 475 252 548 220 C645 178 656 94 735 42"
+                      fill="none"
+                      stroke="oklch(0.76 0.16 225)"
+                      strokeWidth="24"
+                      strokeLinecap="round"
+                      opacity="0.12"
                     />
                     <path
                       id="heroGrowthPath"
                       className="hero-chart-line"
-                      d="M22 485 C105 470 120 420 188 430 S280 360 345 370 S442 280 500 290 S600 165 675 72"
+                      d="M15 545 C105 530 120 485 195 475 C285 462 302 385 372 370 C470 348 475 252 548 220 C645 178 656 94 735 42"
                       fill="none"
-                      stroke="url(#chartLine)"
-                      strokeWidth="9"
+                      stroke="url(#growthStroke)"
+                      strokeWidth="7"
                       strokeLinecap="round"
-                      filter="url(#lineGlow)"
+                      filter="url(#growthGlow)"
                     />
                     {[
-                      [188, 430],
-                      [345, 370],
-                      [500, 290],
-                      [675, 72],
+                      [195, 475],
+                      [372, 370],
+                      [548, 220],
+                      [735, 42],
                     ].map(([cx, cy], index) => (
                       <g
                         key={cx}
                         className="hero-chart-point"
-                        style={{ animationDelay: `${1.15 + index * 0.2}s` }}
+                        style={{ animationDelay: `${1.1 + index * 0.22}s` }}
                       >
-                        <circle cx={cx} cy={cy} r="16" fill="oklch(0.82 0.15 225)" opacity="0.22" />
-                        <circle cx={cx} cy={cy} r="7" fill="white" />
+                        <circle cx={cx} cy={cy} r="19" fill="oklch(0.84 0.14 215)" opacity="0.12" />
+                        <circle cx={cx} cy={cy} r="6" fill="white" />
                       </g>
                     ))}
-                    <circle className="hero-chart-runner" r="9" fill="white">
-                      <animateMotion dur="3.2s" begin="0.4s" repeatCount="indefinite">
+                    <circle className="hero-chart-runner" r="8" fill="white">
+                      <animateMotion dur="3.4s" begin="0.5s" repeatCount="indefinite">
                         <mpath href="#heroGrowthPath" />
                       </animateMotion>
                     </circle>
                   </svg>
-                  <div className="absolute left-5 top-5 flex items-center gap-2 rounded-full border border-primary-foreground/15 bg-navy-deep/60 px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-sky backdrop-blur-sm">
-                    <TrendingUp className="h-4 w-4" /> Evolução em créditos
-                  </div>
                 </div>
+
+                <div className="hero-final-value absolute right-0 top-0 z-20 text-right sm:right-3">
+                  <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary-foreground/55">
+                    Volume comercializado
+                  </p>
+                  <p className="mt-1 text-4xl font-extrabold tracking-tight text-sky sm:text-5xl">
+                    R$ 700 mi
+                  </p>
+                  <div className="ml-auto mt-2 h-1 w-20 rounded-full bg-gradient-to-r from-sky/20 to-sky" />
+                </div>
+
                 <img
                   src={familiaHero}
                   alt="Família celebrando a conquista de um novo objetivo"
                   width={1024}
                   height={1536}
-                  className="family-hero absolute bottom-0 left-[54%] z-10 h-[465px] w-auto max-w-none -translate-x-1/2 object-contain sm:h-[565px]"
+                  className="family-hero absolute bottom-0 left-[48%] z-10 h-[465px] w-auto max-w-none -translate-x-1/2 object-contain sm:h-[570px]"
                 />
               </div>
             </div>
