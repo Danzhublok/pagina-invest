@@ -1,4 +1,5 @@
-﻿import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 
 import {
   Building2,
@@ -9,6 +10,7 @@ import {
   KeyRound,
   MessageCircle,
   Phone,
+  PlayCircle,
   ExternalLink,
   ShieldCheck,
   Sparkles,
@@ -45,17 +47,46 @@ export const Route = createFileRoute("/")({
 
 const WHATSAPP = "https://wa.me/5500000000000";
 const INSTAGRAM = "https://www.instagram.com/g.r.u.p.o_invest/";
-const INSTAGRAM_POST = "https://www.instagram.com/p/DdE4LDxJfCQ/";
+const INSTAGRAM_POST = "https://www.instagram.com/p/DdKECuYJSq3/";
 
-function InstagramVideo() {
+const instagramVideos = [
+  {
+    id: "estrategia",
+    url: "https://www.instagram.com/p/DdE4sfFpGGN/",
+    eyebrow: "Estratégia",
+    title: "Decisões melhores começam com informação",
+    description:
+      "Conteúdo direto para entender possibilidades, organizar prioridades e escolher o próximo passo com mais segurança.",
+  },
+  {
+    id: "patrimonio",
+    url: "https://www.instagram.com/p/DdE46LepKKg/",
+    eyebrow: "Patrimônio",
+    title: "Planejamento que sai do papel",
+    description:
+      "Uma visão prática sobre crédito, consórcio e construção de patrimônio para quem quer avançar com clareza.",
+  },
+];
+
+function InstagramVideo({
+  url = INSTAGRAM_POST,
+  title = "Vídeo do Grupo Invest no Instagram",
+  compact = false,
+}: {
+  url?: string;
+  title?: string;
+  compact?: boolean;
+}) {
   return (
     <div className="mx-auto w-full max-w-[390px]">
       <div className="relative rounded-[2.25rem] bg-navy-deep p-2 shadow-soft ring-1 ring-navy/10">
         <div className="pointer-events-none absolute left-1/2 top-3 z-10 h-1.5 w-16 -translate-x-1/2 rounded-full bg-primary-foreground/25" />
-        <div className="relative h-[620px] overflow-hidden rounded-[1.8rem] bg-white sm:h-[680px]">
+        <div
+          className={`relative overflow-hidden rounded-[1.8rem] bg-white ${compact ? "h-[560px] sm:h-[610px]" : "h-[620px] sm:h-[680px]"}`}
+        >
           <iframe
-            src={`${INSTAGRAM_POST}embed/captioned/`}
-            title="Vídeo do Grupo Invest no Instagram"
+            src={`${url}embed/captioned/`}
+            title={title}
             loading="lazy"
             className="absolute inset-0 h-full w-full border-0"
             allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
@@ -64,14 +95,78 @@ function InstagramVideo() {
         </div>
       </div>
       <a
-        href={INSTAGRAM_POST}
+        href={url}
         target="_blank"
         rel="noreferrer"
         className="mx-auto mt-4 flex w-fit items-center gap-2 text-sm font-semibold text-navy transition-colors hover:text-sky"
       >
-        Assistir no Instagram
-        <ExternalLink className="h-4 w-4" />
+        Assistir no Instagram <ExternalLink className="h-4 w-4" />
       </a>
+    </div>
+  );
+}
+
+function InstagramShowcase() {
+  const [activeId, setActiveId] = useState(instagramVideos[0].id);
+  const activeVideo = instagramVideos.find((video) => video.id === activeId) ?? instagramVideos[0];
+
+  return (
+    <div className="mt-12 grid items-center gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+      <InstagramVideo url={activeVideo.url} title={activeVideo.title} compact />
+      <div>
+        <div className="inline-flex rounded-full border border-border bg-background/70 p-1 shadow-card">
+          {instagramVideos.map((video, index) => (
+            <button
+              key={video.id}
+              type="button"
+              onClick={() => setActiveId(video.id)}
+              aria-pressed={activeId === video.id}
+              className={`rounded-full px-5 py-2.5 text-sm font-bold transition-colors ${activeId === video.id ? "bg-navy text-primary-foreground" : "text-muted-foreground hover:text-navy"}`}
+            >
+              Vídeo {index + 1}
+            </button>
+          ))}
+        </div>
+        <p className="mt-8 text-xs font-bold uppercase tracking-[0.22em] text-sky">
+          {activeVideo.eyebrow}
+        </p>
+        <h3 className="mt-3 text-3xl font-extrabold tracking-tight text-navy sm:text-4xl">
+          {activeVideo.title}
+        </h3>
+        <p className="mt-4 max-w-xl leading-relaxed text-muted-foreground">
+          {activeVideo.description}
+        </p>
+        <div className="mt-8 grid gap-3 sm:grid-cols-3">
+          {[
+            ["+R$ 90 mi", "em créditos comercializados"],
+            ["Belém • PA", "atendimento próximo e regional"],
+            ["Ponta a ponta", "orientação em cada etapa"],
+          ].map(([value, label]) => (
+            <div key={label} className="glass-card rounded-2xl p-4">
+              <p className="font-extrabold text-navy">{value}</p>
+              <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{label}</p>
+            </div>
+          ))}
+        </div>
+        <div className="mt-8 flex flex-wrap gap-3">
+          <a
+            href={activeVideo.url}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-full bg-navy px-6 py-3 text-sm font-bold text-primary-foreground transition-transform hover:scale-[1.03]"
+          >
+            <PlayCircle className="h-4 w-4" /> Assistir no Instagram
+          </a>
+          <a
+            href={INSTAGRAM}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 rounded-full border border-border px-6 py-3 text-sm font-bold text-navy transition-colors hover:border-sky hover:text-sky"
+          >
+            <Instagram className="h-4 w-4" /> Ver todos os conteúdos
+          </a>
+        </div>
+      </div>
     </div>
   );
 }
@@ -526,23 +621,22 @@ function Index() {
           </div>
         </section>
 
-        {/* INSTAGRAM */}
+        {/* CONTEÚDOS DO INSTAGRAM */}
         <section id="instagram" className="bg-sky-soft/50 py-20 md:py-24">
           <div className="mx-auto max-w-6xl px-5">
-            <div className="text-center">
+            <div className="max-w-3xl">
               <span className="inline-flex items-center gap-2 rounded-full bg-sky/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-sky">
-                <Instagram className="h-4 w-4" />
-                Instagram
+                <Instagram className="h-4 w-4" /> Conteúdo Grupo Invest
               </span>
               <h2 className="mt-5 text-3xl font-extrabold tracking-tight text-navy sm:text-5xl">
-                Siga a Grupo Invest no Instagram
+                Informação para decidir com mais confiança
               </h2>
-              <p className="mx-auto mt-4 max-w-xl leading-relaxed text-muted-foreground">
-                Dicas sobre imóveis, consórcios, investimentos e conteúdos para ajudar você a
-                construir seu patrimônio.
+              <p className="mt-4 max-w-2xl leading-relaxed text-muted-foreground">
+                Assista, compare e entenda como a Grupo Invest transforma temas financeiros em
+                caminhos claros para construir patrimônio.
               </p>
             </div>
-
+            <InstagramShowcase />
             <div className="glass-panel mt-12 flex flex-col items-center gap-6 rounded-3xl border border-border p-6 shadow-card sm:flex-row sm:justify-between sm:p-8">
               <div className="flex items-center gap-4 text-center sm:text-left">
                 <div className="rounded-full bg-gradient-to-br from-fuchsia-500 via-rose-500 to-amber-400 p-[3px]">
@@ -570,13 +664,11 @@ function Index() {
                 rel="noreferrer"
                 className="inline-flex shrink-0 items-center gap-2 rounded-full bg-gradient-to-r from-fuchsia-600 via-rose-600 to-orange-500 px-7 py-3.5 text-sm font-bold text-white shadow-soft transition-transform hover:scale-[1.03]"
               >
-                <Instagram className="h-4 w-4" />
-                Seguir no Instagram
+                <Instagram className="h-4 w-4" /> Seguir no Instagram
               </a>
             </div>
           </div>
         </section>
-
         {/* FAQ */}
         <section className="mx-auto max-w-4xl px-5 py-20 md:py-24">
           <h2 className="text-3xl font-bold tracking-tight text-navy sm:text-4xl">
