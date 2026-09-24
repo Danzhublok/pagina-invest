@@ -52,6 +52,7 @@ const INSTAGRAM_POST = "https://www.instagram.com/p/DdKECuYJSq3/";
 const instagramVideos = [
   {
     id: "estrategia",
+    label: "Vídeo 1",
     url: "https://www.instagram.com/p/DdE4sfFpGGN/",
     eyebrow: "Estratégia",
     title: "Decisões melhores começam com informação",
@@ -60,11 +61,21 @@ const instagramVideos = [
   },
   {
     id: "patrimonio",
+    label: "Vídeo 2",
     url: "https://www.instagram.com/p/DdE46LepKKg/",
     eyebrow: "Patrimônio",
     title: "Planejamento que sai do papel",
     description:
       "Uma visão prática sobre crédito, consórcio e construção de patrimônio para quem quer avançar com clareza.",
+  },
+  {
+    id: "consultoria",
+    label: "Carrossel",
+    url: "https://www.instagram.com/p/DdE4WFBici1/?img_index=4",
+    eyebrow: "Atendimento consultivo",
+    title: "Seu sonho merece planejamento",
+    description:
+      "Especialistas em consórcio e crédito, com uma equipe preparada para encontrar a melhor solução para cada cliente — sem fórmulas prontas.",
   },
 ];
 
@@ -85,7 +96,7 @@ function InstagramVideo({
           className={`relative overflow-hidden rounded-[1.8rem] bg-white ${compact ? "h-[560px] sm:h-[610px]" : "h-[620px] sm:h-[680px]"}`}
         >
           <iframe
-            src={`${url}embed/captioned/`}
+            src={`${url.split("?")[0]}embed/captioned/`}
             title={title}
             loading="lazy"
             className="absolute inset-0 h-full w-full border-0"
@@ -100,7 +111,7 @@ function InstagramVideo({
         rel="noreferrer"
         className="mx-auto mt-4 flex w-fit items-center gap-2 text-sm font-semibold text-navy transition-colors hover:text-sky"
       >
-        Assistir no Instagram <ExternalLink className="h-4 w-4" />
+        Ver no Instagram <ExternalLink className="h-4 w-4" />
       </a>
     </div>
   );
@@ -115,7 +126,7 @@ function InstagramShowcase() {
       <InstagramVideo url={activeVideo.url} title={activeVideo.title} compact />
       <div>
         <div className="inline-flex rounded-full border border-border bg-background/70 p-1 shadow-card">
-          {instagramVideos.map((video, index) => (
+          {instagramVideos.map((video) => (
             <button
               key={video.id}
               type="button"
@@ -123,7 +134,7 @@ function InstagramShowcase() {
               aria-pressed={activeId === video.id}
               className={`rounded-full px-5 py-2.5 text-sm font-bold transition-colors ${activeId === video.id ? "bg-navy text-primary-foreground" : "text-muted-foreground hover:text-navy"}`}
             >
-              Vídeo {index + 1}
+              {video.label}
             </button>
           ))}
         </div>
