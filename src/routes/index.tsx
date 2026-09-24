@@ -50,7 +50,8 @@ export const Route = createFileRoute("/")({
   component: Index,
 });
 
-const WHATSAPP = "https://wa.me/5500000000000";
+const WHATSAPP =
+  "https://wa.me/559182746364?text=Ol%C3%A1%2C%20vim%20pelo%20site%20do%20Grupo%20Invest%20e%20gostaria%20de%20uma%20simula%C3%A7%C3%A3o.";
 const INSTAGRAM = "https://www.instagram.com/g.r.u.p.o_invest/";
 const INSTAGRAM_POST = "https://www.instagram.com/p/DdKECuYJSq3/";
 
@@ -937,6 +938,15 @@ function Index() {
               </span>
             </p>
           </div>
+          <a
+            href={WHATSAPP}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 text-sm font-bold text-navy transition-colors hover:text-sky"
+          >
+            <Phone className="h-4 w-4" />
+            +55 91 8274-6364
+          </a>
           <p className="text-xs text-muted-foreground">
             © {new Date().getFullYear()} Grupo Invest. Consórcio não é financiamento —
             administradoras autorizadas pelo Banco Central.
