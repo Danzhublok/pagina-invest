@@ -406,39 +406,82 @@ function Index() {
               </dl>
             </div>
 
-            <div className="relative min-h-[500px] sm:min-h-[590px]">
-              <div className="hero-glow absolute inset-6 rounded-full bg-sky/20 blur-3xl" />
-              <div
-                className="absolute inset-x-0 bottom-16 top-16 flex items-end gap-3 px-5 opacity-45 sm:gap-5 sm:px-10"
-                aria-hidden="true"
-              >
-                {[28, 38, 50, 63, 77, 92].map((height, index) => (
-                  <div
-                    key={height}
-                    className="hero-chart-bar flex-1 rounded-t-2xl bg-gradient-to-t from-sky/15 to-sky/80"
-                    style={{ height: `${height}%`, animationDelay: `${index * 120}ms` }}
+            <div className="relative min-h-[470px] sm:min-h-[580px]">
+              <div className="hero-glow absolute inset-12 rounded-full bg-sky/20 blur-3xl" />
+
+              <div className="hero-chart-shell absolute inset-x-0 bottom-8 top-12 overflow-hidden rounded-[2rem] border border-primary-foreground/10 bg-primary-foreground/[0.04]">
+                <div className="absolute inset-0 bg-[linear-gradient(to_right,transparent_24%,rgba(255,255,255,0.06)_25%,transparent_26%),linear-gradient(to_bottom,transparent_24%,rgba(255,255,255,0.06)_25%,transparent_26%)] bg-[size:25%_25%]" />
+                <svg
+                  viewBox="0 0 620 520"
+                  className="absolute inset-0 h-full w-full"
+                  aria-hidden="true"
+                >
+                  <defs>
+                    <linearGradient id="chartArea" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="oklch(0.82 0.15 225)" stopOpacity="0.42" />
+                      <stop offset="100%" stopColor="oklch(0.82 0.15 225)" stopOpacity="0" />
+                    </linearGradient>
+                    <filter id="lineGlow">
+                      <feGaussianBlur stdDeviation="5" result="blur" />
+                      <feMerge>
+                        <feMergeNode in="blur" />
+                        <feMergeNode in="SourceGraphic" />
+                      </feMerge>
+                    </filter>
+                  </defs>
+                  <path
+                    d="M20 455 C90 440 108 400 165 405 S245 338 300 345 S382 255 432 267 S510 155 600 82 L600 500 L20 500 Z"
+                    fill="url(#chartArea)"
                   />
-                ))}
+                  <path
+                    className="hero-chart-line"
+                    d="M20 455 C90 440 108 400 165 405 S245 338 300 345 S382 255 432 267 S510 155 600 82"
+                    fill="none"
+                    stroke="oklch(0.82 0.15 225)"
+                    strokeWidth="8"
+                    strokeLinecap="round"
+                    filter="url(#lineGlow)"
+                  />
+                  {[
+                    [165, 405],
+                    [300, 345],
+                    [432, 267],
+                    [600, 82],
+                  ].map(([cx, cy], index) => (
+                    <g
+                      key={cx}
+                      className="hero-chart-point"
+                      style={{ animationDelay: `${1.1 + index * 0.22}s` }}
+                    >
+                      <circle cx={cx} cy={cy} r="15" fill="oklch(0.82 0.15 225)" opacity="0.22" />
+                      <circle cx={cx} cy={cy} r="7" fill="white" />
+                    </g>
+                  ))}
+                </svg>
               </div>
-              <div className="absolute right-0 top-8 z-20 rounded-2xl border border-primary-foreground/20 bg-navy-deep/70 px-5 py-4 text-right shadow-soft backdrop-blur-sm sm:right-4">
-                <p className="text-3xl font-extrabold text-sky">R$ 700 mi</p>
-                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary-foreground/70">
-                  créditos vendidos
-                </p>
+
+              <div className="hero-value-card absolute left-0 top-6 z-20 rounded-2xl border border-primary-foreground/20 bg-navy-deep/75 px-5 py-4 shadow-soft backdrop-blur-md sm:left-4">
+                <div className="flex items-center gap-2 text-sky">
+                  <TrendingUp className="h-5 w-5" />
+                  <span className="text-xs font-bold uppercase tracking-[0.16em]">
+                    Resultado construído
+                  </span>
+                </div>
+                <p className="mt-2 text-3xl font-extrabold text-primary-foreground">+ R$ 700 mi</p>
+                <p className="text-xs text-primary-foreground/65">em créditos vendidos</p>
               </div>
+
               <img
                 src={familiaHero}
                 alt="Família celebrando a conquista de um novo objetivo"
                 width={1024}
                 height={1536}
-                className="family-hero absolute bottom-0 left-1/2 z-10 h-[500px] w-auto max-w-none -translate-x-1/2 object-contain sm:h-[590px]"
+                className="family-hero absolute bottom-0 left-[58%] z-10 h-[455px] w-auto max-w-none -translate-x-1/2 object-contain sm:h-[555px]"
               />
-              <div className="glass-panel absolute bottom-5 left-0 z-20 flex items-center gap-3 rounded-2xl px-5 py-4 sm:left-5">
-                <Building2 className="h-8 w-8 text-sky" />
-                <div>
-                  <p className="text-sm font-bold text-navy">Seu próximo passo começa aqui</p>
-                  <p className="text-xs text-muted-foreground">Imóveis • veículos • serviços</p>
-                </div>
+
+              <div className="absolute bottom-7 left-5 z-20 hidden items-center gap-2 rounded-full border border-primary-foreground/15 bg-navy-deep/65 px-4 py-2 text-xs font-semibold text-primary-foreground/80 backdrop-blur-sm sm:flex">
+                <span className="h-2 w-2 animate-pulse rounded-full bg-sky" /> Crescimento que vira
+                patrimônio
               </div>
             </div>
           </div>
