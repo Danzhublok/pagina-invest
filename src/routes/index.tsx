@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   Building2,
@@ -313,6 +313,44 @@ const faq = [
   },
 ];
 
+function AnimatedMetric({
+  value,
+  prefix = "",
+  suffix = "",
+}: {
+  value: number;
+  prefix?: string;
+  suffix?: string;
+}) {
+  const [displayValue, setDisplayValue] = useState(0);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setDisplayValue(value);
+      return;
+    }
+
+    const duration = 1800;
+    const start = performance.now();
+    let frame = 0;
+    const update = (now: number) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 4);
+      setDisplayValue(Math.round(value * eased));
+      if (progress < 1) frame = requestAnimationFrame(update);
+    };
+    frame = requestAnimationFrame(update);
+    return () => cancelAnimationFrame(frame);
+  }, [value]);
+
+  return (
+    <span aria-label={`${prefix}${value}${suffix}`}>
+      {prefix}
+      {displayValue.toLocaleString("pt-BR")}
+      {suffix}
+    </span>
+  );
+}
 function Index() {
   return (
     <div className="liquid-page min-h-screen bg-background text-foreground">
@@ -363,127 +401,134 @@ function Index() {
       <main id="topo">
         {/* HERO */}
         <section className="liquid-hero relative overflow-hidden bg-brand-gradient">
-          <div className="mx-auto grid min-h-[720px] max-w-6xl items-center gap-8 px-5 py-16 md:py-20 lg:grid-cols-[0.95fr_1.05fr]">
-            <div className="relative z-20">
-              <span className="glass-card-dark inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-primary-foreground">
-                <Sparkles className="h-3.5 w-3.5" /> Planejamento que realiza
-              </span>
-              <h1 className="mt-6 text-4xl font-extrabold leading-[1.04] tracking-tight text-primary-foreground sm:text-5xl lg:text-6xl">
-                Planeje hoje.
-                <span className="block text-sky">Conquiste no seu tempo.</span>
-              </h1>
-              <p className="mt-6 max-w-xl text-base leading-relaxed text-primary-foreground/80 sm:text-lg">
-                Consórcio com estratégia, planos flexíveis e acompanhamento próximo para transformar
-                seus objetivos em patrimônio — sem juros de financiamento.
-              </p>
-              <div className="mt-9 flex flex-wrap gap-3">
-                <a
-                  href="#simulador"
-                  className="inline-flex items-center gap-2 rounded-full bg-sky px-7 py-3.5 text-sm font-bold text-primary-foreground shadow-soft transition-transform hover:scale-[1.03]"
-                >
-                  Simule seu plano
-                </a>
-                <a
-                  href={WHATSAPP}
-                  className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/30 px-7 py-3.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-foreground/10"
-                >
-                  <MessageCircle className="h-4 w-4" /> Fale com um especialista
-                </a>
-              </div>
-              <dl className="mt-12 grid max-w-lg grid-cols-3 gap-5 border-t border-primary-foreground/15 pt-7">
-                {[
-                  ["+R$ 700 mi", "em créditos vendidos"],
-                  ["0%", "de juros bancários"],
-                  ["100%", "acompanhamento"],
-                ].map(([k, v]) => (
-                  <div key={v}>
-                    <dt className="text-xl font-extrabold text-sky sm:text-2xl">{k}</dt>
-                    <dd className="mt-1 text-[0.68rem] uppercase leading-relaxed tracking-wider text-primary-foreground/65">
-                      {v}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-
-            <div className="relative min-h-[470px] sm:min-h-[580px]">
-              <div className="hero-glow absolute inset-12 rounded-full bg-sky/20 blur-3xl" />
-
-              <div className="hero-chart-shell absolute inset-x-0 bottom-8 top-12 overflow-hidden rounded-[2rem] border border-primary-foreground/10 bg-primary-foreground/[0.04]">
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,transparent_24%,rgba(255,255,255,0.06)_25%,transparent_26%),linear-gradient(to_bottom,transparent_24%,rgba(255,255,255,0.06)_25%,transparent_26%)] bg-[size:25%_25%]" />
-                <svg
-                  viewBox="0 0 620 520"
-                  className="absolute inset-0 h-full w-full"
-                  aria-hidden="true"
-                >
-                  <defs>
-                    <linearGradient id="chartArea" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="oklch(0.82 0.15 225)" stopOpacity="0.42" />
-                      <stop offset="100%" stopColor="oklch(0.82 0.15 225)" stopOpacity="0" />
-                    </linearGradient>
-                    <filter id="lineGlow">
-                      <feGaussianBlur stdDeviation="5" result="blur" />
-                      <feMerge>
-                        <feMergeNode in="blur" />
-                        <feMergeNode in="SourceGraphic" />
-                      </feMerge>
-                    </filter>
-                  </defs>
-                  <path
-                    d="M20 455 C90 440 108 400 165 405 S245 338 300 345 S382 255 432 267 S510 155 600 82 L600 500 L20 500 Z"
-                    fill="url(#chartArea)"
-                  />
-                  <path
-                    className="hero-chart-line"
-                    d="M20 455 C90 440 108 400 165 405 S245 338 300 345 S382 255 432 267 S510 155 600 82"
-                    fill="none"
-                    stroke="oklch(0.82 0.15 225)"
-                    strokeWidth="8"
-                    strokeLinecap="round"
-                    filter="url(#lineGlow)"
-                  />
-                  {[
-                    [165, 405],
-                    [300, 345],
-                    [432, 267],
-                    [600, 82],
-                  ].map(([cx, cy], index) => (
-                    <g
-                      key={cx}
-                      className="hero-chart-point"
-                      style={{ animationDelay: `${1.1 + index * 0.22}s` }}
-                    >
-                      <circle cx={cx} cy={cy} r="15" fill="oklch(0.82 0.15 225)" opacity="0.22" />
-                      <circle cx={cx} cy={cy} r="7" fill="white" />
-                    </g>
-                  ))}
-                </svg>
-              </div>
-
-              <div className="hero-value-card absolute left-0 top-6 z-20 rounded-2xl border border-primary-foreground/20 bg-navy-deep/75 px-5 py-4 shadow-soft backdrop-blur-md sm:left-4">
-                <div className="flex items-center gap-2 text-sky">
-                  <TrendingUp className="h-5 w-5" />
-                  <span className="text-xs font-bold uppercase tracking-[0.16em]">
-                    Resultado construído
-                  </span>
+          <div className="mx-auto max-w-7xl px-5 pb-10 pt-16 md:pb-12 md:pt-20">
+            <div className="grid items-center gap-8 lg:grid-cols-[0.88fr_1.12fr]">
+              <div className="relative z-20 pb-4 lg:pb-10">
+                <span className="glass-card-dark inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-primary-foreground">
+                  <Sparkles className="h-3.5 w-3.5" /> Planejamento que realiza
+                </span>
+                <h1 className="mt-6 text-4xl font-extrabold leading-[1.04] tracking-tight text-primary-foreground sm:text-5xl lg:text-6xl">
+                  Planeje hoje.
+                  <span className="block text-sky">Conquiste no seu tempo.</span>
+                </h1>
+                <p className="mt-6 max-w-xl text-base leading-relaxed text-primary-foreground/80 sm:text-lg">
+                  Consórcio com estratégia, planos flexíveis e acompanhamento próximo para
+                  transformar seus objetivos em patrimônio — sem juros de financiamento.
+                </p>
+                <div className="mt-9 flex flex-wrap gap-3">
+                  <a
+                    href="#simulador"
+                    className="inline-flex items-center gap-2 rounded-full bg-sky px-7 py-3.5 text-sm font-bold text-primary-foreground shadow-soft transition-transform hover:scale-[1.03]"
+                  >
+                    Simule seu plano
+                  </a>
+                  <a
+                    href={WHATSAPP}
+                    className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/30 px-7 py-3.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-foreground/10"
+                  >
+                    <MessageCircle className="h-4 w-4" /> Fale com um especialista
+                  </a>
                 </div>
-                <p className="mt-2 text-3xl font-extrabold text-primary-foreground">+ R$ 700 mi</p>
-                <p className="text-xs text-primary-foreground/65">em créditos vendidos</p>
               </div>
 
-              <img
-                src={familiaHero}
-                alt="Família celebrando a conquista de um novo objetivo"
-                width={1024}
-                height={1536}
-                className="family-hero absolute bottom-0 left-[58%] z-10 h-[455px] w-auto max-w-none -translate-x-1/2 object-contain sm:h-[555px]"
-              />
-
-              <div className="absolute bottom-7 left-5 z-20 hidden items-center gap-2 rounded-full border border-primary-foreground/15 bg-navy-deep/65 px-4 py-2 text-xs font-semibold text-primary-foreground/80 backdrop-blur-sm sm:flex">
-                <span className="h-2 w-2 animate-pulse rounded-full bg-sky" /> Crescimento que vira
-                patrimônio
+              <div className="relative min-h-[500px] sm:min-h-[600px]">
+                <div className="hero-glow absolute inset-14 rounded-full bg-sky/20 blur-3xl" />
+                <div className="hero-chart-shell absolute inset-x-0 bottom-10 top-5 overflow-hidden rounded-[2rem] border border-primary-foreground/10 bg-primary-foreground/[0.035]">
+                  <div className="absolute inset-0 bg-[linear-gradient(to_right,transparent_24%,rgba(255,255,255,0.07)_25%,transparent_26%),linear-gradient(to_bottom,transparent_24%,rgba(255,255,255,0.07)_25%,transparent_26%)] bg-[size:25%_25%]" />
+                  <svg
+                    viewBox="0 0 700 560"
+                    className="absolute inset-0 h-full w-full"
+                    aria-hidden="true"
+                  >
+                    <defs>
+                      <linearGradient id="chartArea" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="oklch(0.82 0.15 225)" stopOpacity="0.48" />
+                        <stop offset="100%" stopColor="oklch(0.82 0.15 225)" stopOpacity="0" />
+                      </linearGradient>
+                      <linearGradient id="chartLine" x1="0" y1="0" x2="1" y2="0">
+                        <stop offset="0%" stopColor="oklch(0.72 0.15 245)" />
+                        <stop offset="100%" stopColor="oklch(0.9 0.16 205)" />
+                      </linearGradient>
+                      <filter id="lineGlow">
+                        <feGaussianBlur stdDeviation="6" result="blur" />
+                        <feMerge>
+                          <feMergeNode in="blur" />
+                          <feMergeNode in="SourceGraphic" />
+                        </feMerge>
+                      </filter>
+                    </defs>
+                    <path
+                      d="M22 485 C105 470 120 420 188 430 S280 360 345 370 S442 280 500 290 S600 165 675 72 L675 535 L22 535 Z"
+                      fill="url(#chartArea)"
+                    />
+                    <path
+                      id="heroGrowthPath"
+                      className="hero-chart-line"
+                      d="M22 485 C105 470 120 420 188 430 S280 360 345 370 S442 280 500 290 S600 165 675 72"
+                      fill="none"
+                      stroke="url(#chartLine)"
+                      strokeWidth="9"
+                      strokeLinecap="round"
+                      filter="url(#lineGlow)"
+                    />
+                    {[
+                      [188, 430],
+                      [345, 370],
+                      [500, 290],
+                      [675, 72],
+                    ].map(([cx, cy], index) => (
+                      <g
+                        key={cx}
+                        className="hero-chart-point"
+                        style={{ animationDelay: `${1.15 + index * 0.2}s` }}
+                      >
+                        <circle cx={cx} cy={cy} r="16" fill="oklch(0.82 0.15 225)" opacity="0.22" />
+                        <circle cx={cx} cy={cy} r="7" fill="white" />
+                      </g>
+                    ))}
+                    <circle className="hero-chart-runner" r="9" fill="white">
+                      <animateMotion dur="3.2s" begin="0.4s" repeatCount="indefinite">
+                        <mpath href="#heroGrowthPath" />
+                      </animateMotion>
+                    </circle>
+                  </svg>
+                  <div className="absolute left-5 top-5 flex items-center gap-2 rounded-full border border-primary-foreground/15 bg-navy-deep/60 px-4 py-2 text-xs font-bold uppercase tracking-[0.14em] text-sky backdrop-blur-sm">
+                    <TrendingUp className="h-4 w-4" /> Evolução em créditos
+                  </div>
+                </div>
+                <img
+                  src={familiaHero}
+                  alt="Família celebrando a conquista de um novo objetivo"
+                  width={1024}
+                  height={1536}
+                  className="family-hero absolute bottom-0 left-[54%] z-10 h-[465px] w-auto max-w-none -translate-x-1/2 object-contain sm:h-[565px]"
+                />
               </div>
             </div>
+
+            <dl className="relative z-30 mt-2 grid overflow-hidden rounded-3xl border border-primary-foreground/15 bg-navy-deep/45 shadow-soft backdrop-blur-md sm:grid-cols-3">
+              {[
+                { value: 700, prefix: "+R$ ", suffix: " mi", label: "em créditos vendidos" },
+                { value: 25, suffix: "%", label: "taxa administrativa" },
+                { value: 100, suffix: "%", label: "acompanhamento próximo" },
+              ].map((metric, index) => (
+                <div
+                  key={metric.label}
+                  className={`px-7 py-5 ${index > 0 ? "border-t border-primary-foreground/10 sm:border-l sm:border-t-0" : ""}`}
+                >
+                  <dt className="text-2xl font-extrabold text-sky sm:text-3xl">
+                    <AnimatedMetric
+                      value={metric.value}
+                      prefix={metric.prefix}
+                      suffix={metric.suffix}
+                    />
+                  </dt>
+                  <dd className="mt-1 text-xs font-semibold uppercase tracking-[0.13em] text-primary-foreground/65">
+                    {metric.label}
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </div>
         </section>
         {/* VANTAGENS */}
