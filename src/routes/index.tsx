@@ -23,8 +23,7 @@ import {
 } from "lucide-react";
 
 import logoAsset from "@/assets/grupo-invest-logo.jpg";
-import gestoresAsset from "@/assets/gestores.png";
-import heroImovel from "@/assets/hero-imovel.jpeg";
+import familiaHero from "@/assets/familia-hero.png";
 import carousel1 from "@/assets/grupo-invest-carousel-1.jpg";
 import carousel2 from "@/assets/grupo-invest-carousel-2.jpg";
 import carousel3 from "@/assets/grupo-invest-carousel-3.jpg";
@@ -228,7 +227,7 @@ function InstagramShowcase() {
         </p>
         <div className="mt-8 grid gap-3 sm:grid-cols-3">
           {[
-            ["+R$ 90 mi", "em créditos comercializados"],
+            ["+R$ 700 mi", "em créditos vendidos"],
             ["Belém • PA", "atendimento próximo e regional"],
             ["Ponta a ponta", "orientação em cada etapa"],
           ].map(([value, label]) => (
@@ -364,44 +363,42 @@ function Index() {
       <main id="topo">
         {/* HERO */}
         <section className="liquid-hero relative overflow-hidden bg-brand-gradient">
-          <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 py-20 md:py-28 lg:grid-cols-[1.05fr_0.95fr]">
-            <div>
+          <div className="mx-auto grid min-h-[720px] max-w-6xl items-center gap-8 px-5 py-16 md:py-20 lg:grid-cols-[0.95fr_1.05fr]">
+            <div className="relative z-20">
               <span className="glass-card-dark inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-primary-foreground">
-                <Sparkles className="h-3.5 w-3.5" />
-                Investimentos & Consórcios
+                <Sparkles className="h-3.5 w-3.5" /> Planejamento que realiza
               </span>
-              <h1 className="mt-6 text-4xl font-extrabold leading-[1.08] tracking-tight text-primary-foreground sm:text-5xl lg:text-6xl">
-                Seu imóvel próprio
-                <span className="block text-sky"> sem juros e sem pressa.</span>
+              <h1 className="mt-6 text-4xl font-extrabold leading-[1.04] tracking-tight text-primary-foreground sm:text-5xl lg:text-6xl">
+                Planeje hoje.
+                <span className="block text-sky">Conquiste no seu tempo.</span>
               </h1>
               <p className="mt-6 max-w-xl text-base leading-relaxed text-primary-foreground/80 sm:text-lg">
-                Crédito imobiliário e consórcio com curadoria do Grupo Invest. Planejamento honesto,
-                estratégia de contemplação e acompanhamento até as chaves na mão.
+                Consórcio com estratégia, planos flexíveis e acompanhamento próximo para transformar
+                seus objetivos em patrimônio — sem juros de financiamento.
               </p>
               <div className="mt-9 flex flex-wrap gap-3">
                 <a
-                  href={WHATSAPP}
+                  href="#simulador"
                   className="inline-flex items-center gap-2 rounded-full bg-sky px-7 py-3.5 text-sm font-bold text-primary-foreground shadow-soft transition-transform hover:scale-[1.03]"
                 >
-                  <MessageCircle className="h-4 w-4" />
-                  Fale conosco
+                  Simule seu plano
                 </a>
                 <a
-                  href="#simulador"
+                  href={WHATSAPP}
                   className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/30 px-7 py-3.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary-foreground/10"
                 >
-                  Simular agora
+                  <MessageCircle className="h-4 w-4" /> Fale com um especialista
                 </a>
               </div>
-              <dl className="mt-12 grid max-w-lg grid-cols-3 gap-6 border-t border-primary-foreground/15 pt-7">
+              <dl className="mt-12 grid max-w-lg grid-cols-3 gap-5 border-t border-primary-foreground/15 pt-7">
                 {[
-                  ["+500", "famílias atendidas"],
-                  ["0%", "de juros"],
+                  ["+R$ 700 mi", "em créditos vendidos"],
+                  ["0%", "de juros bancários"],
                   ["100%", "acompanhamento"],
                 ].map(([k, v]) => (
                   <div key={v}>
-                    <dt className="text-2xl font-extrabold text-sky sm:text-3xl">{k}</dt>
-                    <dd className="mt-1 text-xs uppercase tracking-wider text-primary-foreground/65">
+                    <dt className="text-xl font-extrabold text-sky sm:text-2xl">{k}</dt>
+                    <dd className="mt-1 text-[0.68rem] uppercase leading-relaxed tracking-wider text-primary-foreground/65">
                       {v}
                     </dd>
                   </div>
@@ -409,29 +406,43 @@ function Index() {
               </dl>
             </div>
 
-            <div className="relative">
-              <div className="liquid-frame overflow-hidden rounded-[2rem] shadow-soft">
-                <img
-                  src={heroImovel}
-                  alt="Prédio residencial moderno em dia ensolarado"
-                  width={1280}
-                  height={1280}
-                  className="h-[380px] w-full object-cover sm:h-[460px]"
-                />
+            <div className="relative min-h-[500px] sm:min-h-[590px]">
+              <div className="hero-glow absolute inset-6 rounded-full bg-sky/20 blur-3xl" />
+              <div
+                className="absolute inset-x-0 bottom-16 top-16 flex items-end gap-3 px-5 opacity-45 sm:gap-5 sm:px-10"
+                aria-hidden="true"
+              >
+                {[28, 38, 50, 63, 77, 92].map((height, index) => (
+                  <div
+                    key={height}
+                    className="hero-chart-bar flex-1 rounded-t-2xl bg-gradient-to-t from-sky/15 to-sky/80"
+                    style={{ height: `${height}%`, animationDelay: `${index * 120}ms` }}
+                  />
+                ))}
               </div>
-              <div className="glass-panel absolute -bottom-6 -left-4 flex items-center gap-3 rounded-2xl px-5 py-4 sm:left-6">
-                <Building2 className="h-9 w-9 text-sky" />
+              <div className="absolute right-0 top-8 z-20 rounded-2xl border border-primary-foreground/20 bg-navy-deep/70 px-5 py-4 text-right shadow-soft backdrop-blur-sm sm:right-4">
+                <p className="text-3xl font-extrabold text-sky">R$ 700 mi</p>
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-primary-foreground/70">
+                  créditos vendidos
+                </p>
+              </div>
+              <img
+                src={familiaHero}
+                alt="Família celebrando a conquista de um novo objetivo"
+                width={1024}
+                height={1536}
+                className="family-hero absolute bottom-0 left-1/2 z-10 h-[500px] w-auto max-w-none -translate-x-1/2 object-contain sm:h-[590px]"
+              />
+              <div className="glass-panel absolute bottom-5 left-0 z-20 flex items-center gap-3 rounded-2xl px-5 py-4 sm:left-5">
+                <Building2 className="h-8 w-8 text-sky" />
                 <div>
-                  <p className="text-sm font-bold text-navy">Carta de crédito</p>
-                  <p className="text-xs text-muted-foreground">
-                    Imóveis, veículos, motos e serviços
-                  </p>
+                  <p className="text-sm font-bold text-navy">Seu próximo passo começa aqui</p>
+                  <p className="text-xs text-muted-foreground">Imóveis • veículos • serviços</p>
                 </div>
               </div>
             </div>
           </div>
         </section>
-
         {/* VANTAGENS */}
         <section id="vantagens" className="mx-auto max-w-6xl px-5 py-20 md:py-24">
           <div className="max-w-2xl">
@@ -577,12 +588,12 @@ function Index() {
           <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 lg:grid-cols-[1fr_1fr]">
             <div className="relative">
               <img
-                src={gestoresAsset}
-                alt="Luiz Ricardo e Talia Pinheiro, gestores do Grupo Invest"
+                src={logoAsset}
+                alt="Logo do Grupo Invest"
                 loading="lazy"
                 width={638}
                 height={638}
-                className="w-full rounded-[2rem] object-cover shadow-soft"
+                className="mx-auto aspect-square w-full max-w-[520px] rounded-[2rem] bg-white object-contain p-10 shadow-soft"
               />
               <div className="glass-panel absolute -bottom-6 left-6 right-6 rounded-2xl px-5 py-4 sm:right-auto">
                 <p className="text-sm font-bold text-navy">Luiz Ricardo &amp; Talia Pinheiro</p>
@@ -597,13 +608,13 @@ function Index() {
               <p className="mt-5 leading-relaxed text-primary-foreground/75">
                 Há mais de 5 anos no mercado de Belém, o Grupo Invest conecta pessoas a
                 oportunidades imobiliárias com estratégia, transparência e atendimento próximo. Já
-                são mais de R$ 745 milhões em créditos, transformando planos em patrimônio.
+                são mais de R$ 700 milhões em créditos, transformando planos em patrimônio.
               </p>
 
               <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3">
                 {[
                   ["+5 anos", "de mercado | Belém, PA"],
-                  ["+R$ 745 mi", "em créditos"],
+                  ["+R$ 700 mi", "em créditos vendidos"],
                   ["Soluções", "Imóveis • Consórcios • Investimentos"],
                 ].map(([valor, legenda]) => (
                   <div key={legenda} className="glass-card-dark rounded-2xl p-4">

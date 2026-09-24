@@ -1,4 +1,4 @@
-﻿import { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { Bike, Building2, Car, MessageCircle, Wrench } from "lucide-react";
 
 type Categoria = {
@@ -24,7 +24,7 @@ const CATEGORIAS: Categoria[] = [
     max: 1500000,
     step: 10000,
     prazos: [120, 150, 180, 200, 240],
-    taxaAdm: 0.19,
+    taxaAdm: 0.25,
     fundoReserva: 0.02,
     inicial: 350000,
     prazoInicial: 200,
@@ -37,7 +37,7 @@ const CATEGORIAS: Categoria[] = [
     max: 500000,
     step: 5000,
     prazos: [36, 48, 60, 72, 84, 100],
-    taxaAdm: 0.16,
+    taxaAdm: 0.25,
     fundoReserva: 0.02,
     inicial: 100000,
     prazoInicial: 72,
@@ -50,7 +50,7 @@ const CATEGORIAS: Categoria[] = [
     max: 150000,
     step: 2500,
     prazos: [24, 36, 48, 60, 72],
-    taxaAdm: 0.15,
+    taxaAdm: 0.25,
     fundoReserva: 0.02,
     inicial: 30000,
     prazoInicial: 48,
@@ -63,7 +63,7 @@ const CATEGORIAS: Categoria[] = [
     max: 200000,
     step: 5000,
     prazos: [24, 36, 48, 60],
-    taxaAdm: 0.18,
+    taxaAdm: 0.25,
     fundoReserva: 0.02,
     inicial: 50000,
     prazoInicial: 48,
@@ -113,7 +113,11 @@ export function SimuladorConsorcio({ whatsapp }: { whatsapp: string }) {
 
         <div className="mt-7">
           <p className="text-sm font-semibold text-navy">O que você quer conquistar?</p>
-          <div className="mt-3 flex flex-wrap gap-2" role="group" aria-label="Categoria do consórcio">
+          <div
+            className="mt-3 flex flex-wrap gap-2"
+            role="group"
+            aria-label="Categoria do consórcio"
+          >
             {CATEGORIAS.map((item) => {
               const Icon = item.icon;
               const ativa = item.id === categoria.id;
@@ -234,4 +238,3 @@ export function SimuladorConsorcio({ whatsapp }: { whatsapp: string }) {
     </div>
   );
 }
-
