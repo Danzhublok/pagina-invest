@@ -24,6 +24,7 @@ import {
 
 import logoAsset from "@/assets/grupo-invest-logo.jpg";
 import familiaHero from "@/assets/familia-hero.png";
+import heroImovel from "@/assets/hero-imovel.jpeg";
 import carousel1 from "@/assets/grupo-invest-carousel-1.jpg";
 import carousel2 from "@/assets/grupo-invest-carousel-2.jpg";
 import carousel3 from "@/assets/grupo-invest-carousel-3.jpg";
@@ -691,16 +692,40 @@ function Index() {
         {/* SOBRE NÓS */}
         <section id="sobre-nos" className="liquid-dark-section bg-navy-deep py-20 md:py-24">
           <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 lg:grid-cols-[1fr_1fr]">
-            <div className="relative">
-              <img
-                src={logoAsset}
-                alt="Logo do Grupo Invest"
-                loading="lazy"
-                width={638}
-                height={638}
-                className="mx-auto aspect-square w-full max-w-[520px] rounded-[2rem] bg-white object-contain p-10 shadow-soft"
-              />
-              <div className="glass-panel absolute -bottom-6 left-6 right-6 rounded-2xl px-5 py-4 sm:right-auto">
+            <div className="relative mx-auto aspect-square w-full max-w-[520px] overflow-visible">
+              <div className="absolute inset-0 overflow-hidden rounded-[2rem] shadow-soft">
+                <img
+                  src={heroImovel}
+                  alt="Família diante de sua nova casa"
+                  loading="lazy"
+                  width={1024}
+                  height={1024}
+                  className="h-full w-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/20 via-transparent to-navy-deep/85" />
+                <p className="absolute left-6 top-6 z-20 max-w-[12ch] text-3xl font-extrabold leading-tight tracking-tight text-white drop-shadow-lg sm:left-8 sm:top-8 sm:text-4xl">
+                  Seu sonho. Seu patrimônio.
+                </p>
+                <img
+                  src={familiaHero}
+                  alt="Família celebrando a conquista da casa própria"
+                  loading="lazy"
+                  width={1024}
+                  height={1536}
+                  className="absolute bottom-0 left-1/2 z-10 h-[78%] w-auto max-w-none -translate-x-1/2 object-contain drop-shadow-2xl"
+                />
+                <div className="absolute bottom-6 left-6 right-6 z-20 rounded-2xl border border-white/30 bg-white/85 p-3 shadow-soft backdrop-blur-md sm:left-8 sm:right-8">
+                  <img
+                    src={logoAsset}
+                    alt="Grupo Invest — Investimentos & Consórcios"
+                    loading="lazy"
+                    width={638}
+                    height={220}
+                    className="mx-auto h-16 w-full object-contain mix-blend-multiply sm:h-20"
+                  />
+                </div>
+              </div>
+              <div className="glass-panel absolute -bottom-6 left-6 right-6 z-30 rounded-2xl px-5 py-4 sm:right-auto">
                 <p className="text-sm font-bold text-navy">Luiz Ricardo &amp; Talia Pinheiro</p>
                 <p className="text-xs text-muted-foreground">Gestores do Grupo Invest</p>
               </div>
