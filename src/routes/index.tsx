@@ -726,7 +726,7 @@ function Index() {
                 <polygon points="20,28 456,28 570,420 108,420" fill="none" stroke="currentColor" strokeWidth="2" className="text-sky" />
               </svg>
 
-              <div className="absolute bottom-[13%] left-[1%] z-40 flex h-20 w-28 items-center justify-center bg-white/90 p-2 shadow-soft backdrop-blur-sm sm:h-24 sm:w-36">
+              <div className="absolute left-[2%] top-[12%] z-40 flex h-16 w-24 items-center justify-center bg-white/90 p-2 shadow-soft backdrop-blur-sm sm:h-20 sm:w-32">
                 <img src={logoAsset} alt="Grupo Invest — Investimentos & Consórcios" loading="lazy" width={638} height={638} className="h-full w-full object-contain mix-blend-multiply" />
               </div>
             </div>
