@@ -24,7 +24,7 @@ import {
 
 import logoAsset from "@/assets/grupo-invest-logo.jpg";
 import familiaHero from "@/assets/familia-hero.png";
-import heroImovel from "@/assets/hero-imovel.jpeg";
+import sobreNosFamilia from "@/assets/sobre-nos-familia-v2.png";
 import carousel1 from "@/assets/grupo-invest-carousel-1.jpg";
 import carousel2 from "@/assets/grupo-invest-carousel-2.jpg";
 import carousel3 from "@/assets/grupo-invest-carousel-3.jpg";
@@ -693,38 +693,28 @@ function Index() {
         <section id="sobre-nos" className="liquid-dark-section bg-navy-deep py-20 md:py-24">
           <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 lg:grid-cols-[1fr_1fr]">
             <div className="relative mx-auto min-h-[460px] w-full max-w-[560px] sm:min-h-[540px]">
-              <div className="absolute right-2 top-0 h-[84%] w-[78%] overflow-hidden bg-navy [clip-path:polygon(18%_0,100%_0,82%_100%,0_100%)]">
+              <div className="absolute inset-x-4 top-10 h-[78%] border-2 border-sky [clip-path:polygon(10%_0,100%_0,90%_100%,0_100%)] sm:inset-x-0" aria-hidden="true" />
+
+              <div className="absolute inset-x-0 top-0 h-[82%] overflow-hidden shadow-soft [clip-path:polygon(14%_0,100%_0,86%_100%,0_100%)] sm:left-8 sm:right-4">
                 <img
-                  src={heroImovel}
-                  alt="Casa moderna representando a conquista do imóvel próprio"
+                  src={sobreNosFamilia}
+                  alt="Família brasileira diante da casa própria"
                   loading="lazy"
-                  width={1024}
-                  height={1024}
-                  className="h-full w-full object-cover saturate-50"
+                  width={1456}
+                  height={1088}
+                  className="h-full w-full object-cover object-center"
                 />
-                <div className="absolute inset-0 bg-gradient-to-br from-navy/65 via-navy/25 to-sky/35 mix-blend-multiply" />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/90 via-navy/10 to-transparent" />
+                <div className="absolute inset-0 bg-sky/10 mix-blend-color" />
+                <p className="absolute bottom-7 left-[12%] z-20 max-w-[13ch] text-2xl font-extrabold leading-tight text-white sm:text-3xl">
+                  Realizando sonhos. Construindo patrimônio.
+                </p>
               </div>
 
-              <svg viewBox="0 0 560 390" className="pointer-events-none absolute left-0 top-16 z-20 w-full overflow-visible" aria-hidden="true">
-                <polygon points="18,35 455,35 545,355 90,355" fill="none" stroke="currentColor" strokeWidth="2" className="text-sky" />
-              </svg>
-
-              <div className="absolute bottom-8 left-0 z-30 h-[48%] w-[62%] overflow-hidden bg-gradient-to-br from-sky-soft to-sky/40 shadow-soft [clip-path:polygon(15%_0,100%_0,82%_100%,0_100%)]">
-                <img
-                  src={familiaHero}
-                  alt="Família celebrando a realização de um sonho"
-                  loading="lazy"
-                  width={1024}
-                  height={1536}
-                  className="h-full w-full object-contain object-bottom grayscale"
-                />
-                <div className="absolute inset-0 bg-sky/20 mix-blend-color" />
-              </div>
-
-              <div className="absolute bottom-[18%] left-3 z-40 flex h-20 w-24 items-center justify-center bg-sky p-2 shadow-soft sm:left-5 sm:h-24 sm:w-28">
+              <div className="absolute bottom-6 left-4 z-30 flex h-24 w-32 items-center justify-center border border-white/50 bg-white/90 p-3 shadow-soft backdrop-blur-md sm:left-0 sm:h-28 sm:w-40">
                 <img
                   src={logoAsset}
-                  alt="Grupo Invest"
+                  alt="Grupo Invest — Investimentos & Consórcios"
                   loading="lazy"
                   width={638}
                   height={638}
@@ -732,12 +722,7 @@ function Index() {
                 />
               </div>
 
-              <div className="absolute bottom-0 right-0 z-40 max-w-[250px] text-right">
-                <p className="text-xs font-bold uppercase tracking-[0.24em] text-sky">Grupo Invest</p>
-                <p className="mt-2 text-2xl font-extrabold leading-tight text-primary-foreground sm:text-3xl">
-                  Realizando sonhos. Construindo patrimônio.
-                </p>
-              </div>
+              <div className="absolute bottom-5 right-5 z-30 h-2 w-24 bg-sky sm:right-10" aria-hidden="true" />
             </div>            <div>
               <p className="text-xs font-bold uppercase tracking-[0.22em] text-sky">Sobre nós</p>
               <h2 className="mt-3 text-3xl font-bold tracking-tight text-primary-foreground sm:text-4xl">
