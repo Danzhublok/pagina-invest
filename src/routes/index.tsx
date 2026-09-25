@@ -692,29 +692,44 @@ function Index() {
         {/* SOBRE NÓS */}
         <section id="sobre-nos" className="liquid-dark-section bg-navy-deep py-20 md:py-24">
           <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 lg:grid-cols-[1fr_1fr]">
-            <div className="relative mx-auto min-h-[460px] w-full max-w-[560px] sm:min-h-[540px]">
-              <div className="absolute inset-x-4 top-10 h-[78%] border-2 border-sky [clip-path:polygon(10%_0,100%_0,90%_100%,0_100%)] sm:inset-x-0" aria-hidden="true" />
+            <div className="relative mx-auto min-h-[440px] w-full max-w-[580px] sm:min-h-[540px]">
+              <div className="absolute left-[8%] top-[10%] h-[72%] w-[38%] bg-white/5 [clip-path:polygon(18%_0,100%_0,78%_100%,0_100%)]" aria-hidden="true" />
+              <div className="absolute right-0 top-[18%] h-[62%] w-[30%] bg-sky/5 [clip-path:polygon(0_0,45%_0,100%_100%,35%_100%)]" aria-hidden="true" />
 
-              <div className="absolute inset-x-0 top-0 h-[82%] overflow-hidden shadow-soft [clip-path:polygon(14%_0,100%_0,86%_100%,0_100%)] sm:left-8 sm:right-4">
+              <div className="absolute right-[2%] top-0 h-[84%] w-[78%] overflow-hidden shadow-soft [clip-path:polygon(16%_0,100%_0,84%_100%,0_100%)]">
                 <img
                   src={sobreNosFamilia}
                   alt="Família brasileira diante da casa própria"
                   loading="lazy"
                   width={1456}
                   height={1088}
-                  className="h-full w-full object-cover object-center"
+                  className="h-full w-full object-cover object-center grayscale"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy-deep/90 via-navy/10 to-transparent" />
-                <div className="absolute inset-0 bg-sky/10 mix-blend-color" />
-                <p className="absolute bottom-7 left-[12%] z-20 max-w-[13ch] text-2xl font-extrabold leading-tight text-white sm:text-3xl">
-                  Realizando sonhos. Construindo patrimônio.
-                </p>
+                <div className="absolute inset-0 bg-navy/60 mix-blend-color" />
+                <div className="absolute inset-0 bg-gradient-to-br from-sky/10 via-transparent to-navy-deep/45" />
               </div>
 
-              <div className="absolute bottom-6 left-4 z-30 flex h-24 w-32 items-center justify-center border border-white/50 bg-white/90 p-3 shadow-soft backdrop-blur-md sm:left-0 sm:h-28 sm:w-40">
+              <div className="absolute bottom-[4%] left-[2%] z-20 h-[42%] w-[59%] overflow-hidden shadow-soft [clip-path:polygon(14%_0,100%_0,80%_100%,0_100%)]">
+                <img
+                  src={sobreNosFamilia}
+                  alt="Família reunida celebrando uma nova conquista"
+                  loading="lazy"
+                  width={1456}
+                  height={1088}
+                  className="h-full w-full scale-125 object-cover object-[35%_55%] grayscale"
+                />
+                <div className="absolute inset-0 bg-sky/55 mix-blend-color" />
+                <div className="absolute inset-0 bg-navy/20" />
+              </div>
+
+              <svg viewBox="0 0 580 420" className="pointer-events-none absolute left-0 top-[12%] z-30 w-full overflow-visible" aria-hidden="true">
+                <polygon points="22,22 458,22 558,390 112,390" fill="none" stroke="currentColor" strokeWidth="2" className="text-sky" />
+              </svg>
+
+              <div className="absolute bottom-[15%] left-0 z-40 flex h-20 w-20 items-center justify-center bg-sky p-2 shadow-soft sm:h-24 sm:w-24">
                 <img
                   src={logoAsset}
-                  alt="Grupo Invest — Investimentos & Consórcios"
+                  alt="Grupo Invest"
                   loading="lazy"
                   width={638}
                   height={638}
@@ -722,7 +737,7 @@ function Index() {
                 />
               </div>
 
-              <div className="absolute bottom-5 right-5 z-30 h-2 w-24 bg-sky sm:right-10" aria-hidden="true" />
+              <div className="absolute bottom-[12%] right-[3%] z-40 h-3 w-3 rounded-full border border-sky bg-primary-foreground/70" aria-hidden="true" />
             </div>            <div>
               <p className="text-xs font-bold uppercase tracking-[0.22em] text-sky">Sobre nós</p>
               <h2 className="mt-3 text-3xl font-bold tracking-tight text-primary-foreground sm:text-4xl">
