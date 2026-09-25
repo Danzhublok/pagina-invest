@@ -25,6 +25,7 @@ import {
 import logoAsset from "@/assets/grupo-invest-logo.jpg";
 import familiaHero from "@/assets/familia-hero.png";
 import sobreNosFamilia from "@/assets/sobre-nos-familia-v2.png";
+import sobreNosFamiliaSecundaria from "@/assets/sobre-nos-familia-secundaria.png";
 import carousel1 from "@/assets/grupo-invest-carousel-1.jpg";
 import carousel2 from "@/assets/grupo-invest-carousel-2.jpg";
 import carousel3 from "@/assets/grupo-invest-carousel-3.jpg";
@@ -710,12 +711,12 @@ function Index() {
 
               <div className="absolute bottom-[2%] left-0 z-20 h-[43%] w-[60%] overflow-hidden shadow-soft [clip-path:polygon(13%_0,100%_0,82%_100%,0_100%)]">
                 <img
-                  src={sobreNosFamilia}
-                  alt="Detalhe da família reunida"
+                  src={sobreNosFamiliaSecundaria}
+                  alt="Família reunida olhando para a câmera"
                   loading="lazy"
                   width={1456}
                   height={1088}
-                  className="h-full w-full scale-[1.65] object-cover object-[23%_55%] grayscale contrast-110"
+                  className="h-full w-full object-cover object-center grayscale contrast-110"
                 />
                 <div className="absolute inset-0 bg-sky/45 mix-blend-color" />
                 <div className="absolute inset-0 bg-navy/15" />
@@ -725,12 +726,11 @@ function Index() {
                 <polygon points="20,28 456,28 570,420 108,420" fill="none" stroke="currentColor" strokeWidth="2" className="text-sky" />
               </svg>
 
-              <div className="absolute bottom-[13%] left-[1%] z-40 flex h-20 w-20 items-center justify-center bg-[#d8ae58] p-4 shadow-soft sm:h-24 sm:w-24">
-                <img src="/favicon.png" alt="Símbolo Grupo Invest" loading="lazy" width={64} height={64} className="h-full w-full object-contain" />
+              <div className="absolute bottom-[13%] left-[1%] z-40 flex h-20 w-28 items-center justify-center bg-white/90 p-2 shadow-soft backdrop-blur-sm sm:h-24 sm:w-36">
+                <img src={logoAsset} alt="Grupo Invest — Investimentos & Consórcios" loading="lazy" width={638} height={638} className="h-full w-full object-contain mix-blend-multiply" />
               </div>
-
-              <div className="absolute bottom-[11%] right-[3%] z-40 h-3 w-3 rounded-full border border-[#d8ae58] bg-primary-foreground/80" aria-hidden="true" />
-            </div>            <div>
+            </div>
+            <div>
               <p className="text-xs font-bold uppercase tracking-[0.22em] text-sky">Sobre nós</p>
               <h2 className="mt-3 text-3xl font-bold tracking-tight text-primary-foreground sm:text-4xl">
                 Transformamos oportunidades em patrimônio
