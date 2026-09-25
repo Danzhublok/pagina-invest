@@ -692,52 +692,44 @@ function Index() {
         {/* SOBRE NÓS */}
         <section id="sobre-nos" className="liquid-dark-section bg-navy-deep py-20 md:py-24">
           <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 lg:grid-cols-[1fr_1fr]">
-            <div className="relative mx-auto min-h-[440px] w-full max-w-[580px] sm:min-h-[540px]">
-              <div className="absolute left-[8%] top-[10%] h-[72%] w-[38%] bg-white/5 [clip-path:polygon(18%_0,100%_0,78%_100%,0_100%)]" aria-hidden="true" />
-              <div className="absolute right-0 top-[18%] h-[62%] w-[30%] bg-sky/5 [clip-path:polygon(0_0,45%_0,100%_100%,35%_100%)]" aria-hidden="true" />
+            <div className="relative mx-auto min-h-[460px] w-full max-w-[590px] sm:min-h-[560px]">
+              <div className="absolute left-[7%] top-[7%] h-[78%] w-[86%] bg-white/[0.04] [clip-path:polygon(10%_0,88%_0,100%_86%,0_86%)]" aria-hidden="true" />
 
-              <div className="absolute right-[2%] top-0 h-[84%] w-[78%] overflow-hidden shadow-soft [clip-path:polygon(16%_0,100%_0,84%_100%,0_100%)]">
+              <div className="absolute right-0 top-0 h-[78%] w-[76%] overflow-hidden shadow-soft [clip-path:polygon(14%_0,100%_0,84%_100%,0_100%)]">
                 <img
                   src={sobreNosFamilia}
                   alt="Família brasileira diante da casa própria"
                   loading="lazy"
                   width={1456}
                   height={1088}
-                  className="h-full w-full object-cover object-center grayscale"
+                  className="h-full w-full object-cover object-[52%_center] grayscale contrast-110 brightness-105"
                 />
-                <div className="absolute inset-0 bg-navy/60 mix-blend-color" />
-                <div className="absolute inset-0 bg-gradient-to-br from-sky/10 via-transparent to-navy-deep/45" />
+                <div className="absolute inset-0 bg-[#172d78]/55 mix-blend-color" />
+                <div className="absolute inset-0 bg-gradient-to-br from-sky/10 via-transparent to-navy-deep/35" />
               </div>
 
-              <div className="absolute bottom-[4%] left-[2%] z-20 h-[42%] w-[59%] overflow-hidden shadow-soft [clip-path:polygon(14%_0,100%_0,80%_100%,0_100%)]">
+              <div className="absolute bottom-[2%] left-0 z-20 h-[43%] w-[60%] overflow-hidden shadow-soft [clip-path:polygon(13%_0,100%_0,82%_100%,0_100%)]">
                 <img
                   src={sobreNosFamilia}
-                  alt="Família reunida celebrando uma nova conquista"
+                  alt="Detalhe da família reunida"
                   loading="lazy"
                   width={1456}
                   height={1088}
-                  className="h-full w-full scale-125 object-cover object-[35%_55%] grayscale"
+                  className="h-full w-full scale-[1.65] object-cover object-[23%_55%] grayscale contrast-110"
                 />
-                <div className="absolute inset-0 bg-sky/55 mix-blend-color" />
-                <div className="absolute inset-0 bg-navy/20" />
+                <div className="absolute inset-0 bg-sky/45 mix-blend-color" />
+                <div className="absolute inset-0 bg-navy/15" />
               </div>
 
-              <svg viewBox="0 0 580 420" className="pointer-events-none absolute left-0 top-[12%] z-30 w-full overflow-visible" aria-hidden="true">
-                <polygon points="22,22 458,22 558,390 112,390" fill="none" stroke="currentColor" strokeWidth="2" className="text-sky" />
+              <svg viewBox="0 0 590 455" className="pointer-events-none absolute left-0 top-[10%] z-30 w-full overflow-visible" aria-hidden="true">
+                <polygon points="20,28 456,28 570,420 108,420" fill="none" stroke="currentColor" strokeWidth="2" className="text-sky" />
               </svg>
 
-              <div className="absolute bottom-[15%] left-0 z-40 flex h-20 w-20 items-center justify-center bg-sky p-2 shadow-soft sm:h-24 sm:w-24">
-                <img
-                  src={logoAsset}
-                  alt="Grupo Invest"
-                  loading="lazy"
-                  width={638}
-                  height={638}
-                  className="h-full w-full object-contain mix-blend-multiply"
-                />
+              <div className="absolute bottom-[13%] left-[1%] z-40 flex h-20 w-20 items-center justify-center bg-[#d8ae58] p-4 shadow-soft sm:h-24 sm:w-24">
+                <img src="/favicon.png" alt="Símbolo Grupo Invest" loading="lazy" width={64} height={64} className="h-full w-full object-contain" />
               </div>
 
-              <div className="absolute bottom-[12%] right-[3%] z-40 h-3 w-3 rounded-full border border-sky bg-primary-foreground/70" aria-hidden="true" />
+              <div className="absolute bottom-[11%] right-[3%] z-40 h-3 w-3 rounded-full border border-[#d8ae58] bg-primary-foreground/80" aria-hidden="true" />
             </div>            <div>
               <p className="text-xs font-bold uppercase tracking-[0.22em] text-sky">Sobre nós</p>
               <h2 className="mt-3 text-3xl font-bold tracking-tight text-primary-foreground sm:text-4xl">
