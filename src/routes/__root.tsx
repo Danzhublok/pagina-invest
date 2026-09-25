@@ -113,11 +113,45 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   errorComponent: ErrorComponent,
 });
 
+const organizationStructuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://grupoinvest.vercel.app/#organization",
+      name: "Grupo Invest",
+      alternateName: "Grupo Invest Belém",
+      url: "https://grupoinvest.vercel.app/",
+      logo: "https://grupoinvest.vercel.app/favicon.png",
+      description:
+        "Consultoria especializada em consórcios, crédito imobiliário e investimentos em Belém, Pará.",
+      telephone: "+55 91 8274-6364",
+      areaServed: {
+        "@type": "City",
+        name: "Belém",
+      },
+      sameAs: ["https://www.instagram.com/g.r.u.p.o_invest/"],
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://grupoinvest.vercel.app/#website",
+      url: "https://grupoinvest.vercel.app/",
+      name: "Grupo Invest",
+      alternateName: "Grupo Invest Belém",
+      publisher: { "@id": "https://grupoinvest.vercel.app/#organization" },
+      inLanguage: "pt-BR",
+    },
+  ],
+};
 function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="pt-BR">
       <head>
         <HeadContent />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationStructuredData) }}
+        />
       </head>
       <body>
         {children}

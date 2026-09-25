@@ -35,13 +35,13 @@ import { SimuladorConsorcio } from "@/components/SimuladorConsorcio";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Grupo Invest | Crédito Imobiliário e Consórcio" },
+      { title: "Grupo Invest Belém | Consórcio e Crédito Imobiliário" },
       {
         name: "description",
         content:
-          "Imóveis na planta, consórcios e investimentos em Belém. Simule seu plano e fale conosco.",
+          "Grupo Invest Belém: consórcios, crédito imobiliário e investimentos com atendimento personalizado. Simule seu plano.",
       },
-      { property: "og:title", content: "Grupo Invest | Crédito Imobiliário e Consórcio" },
+      { property: "og:title", content: "Grupo Invest Belém | Consórcio e Crédito Imobiliário" },
       {
         property: "og:description",
         content:
@@ -408,7 +408,7 @@ function Index() {
             <div className="grid items-center gap-8 lg:grid-cols-[0.88fr_1.12fr]">
               <div className="relative z-20 pb-4 lg:pb-10">
                 <span className="glass-card-dark inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-primary-foreground">
-                  <Sparkles className="h-3.5 w-3.5" /> Planejamento que realiza
+                  <Sparkles className="h-3.5 w-3.5" /> Grupo Invest Belém
                 </span>
                 <h1 className="mt-6 text-4xl font-extrabold leading-[1.04] tracking-tight text-primary-foreground sm:text-5xl lg:text-6xl">
                   Planeje hoje.
