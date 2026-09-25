@@ -692,45 +692,53 @@ function Index() {
         {/* SOBRE NÓS */}
         <section id="sobre-nos" className="liquid-dark-section bg-navy-deep py-20 md:py-24">
           <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 lg:grid-cols-[1fr_1fr]">
-            <div className="relative mx-auto aspect-square w-full max-w-[520px] overflow-visible">
-              <div className="absolute inset-0 overflow-hidden rounded-[2rem] shadow-soft">
+            <div className="relative mx-auto min-h-[460px] w-full max-w-[560px] sm:min-h-[540px]">
+              <div className="absolute right-2 top-0 h-[84%] w-[78%] overflow-hidden bg-navy [clip-path:polygon(18%_0,100%_0,82%_100%,0_100%)]">
                 <img
                   src={heroImovel}
-                  alt="Família diante de sua nova casa"
+                  alt="Casa moderna representando a conquista do imóvel próprio"
                   loading="lazy"
                   width={1024}
                   height={1024}
-                  className="h-full w-full object-cover"
+                  className="h-full w-full object-cover saturate-50"
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-navy-deep/20 via-transparent to-navy-deep/85" />
-                <p className="absolute left-6 top-6 z-20 max-w-[12ch] text-3xl font-extrabold leading-tight tracking-tight text-white drop-shadow-lg sm:left-8 sm:top-8 sm:text-4xl">
-                  Seu sonho. Seu patrimônio.
-                </p>
+                <div className="absolute inset-0 bg-gradient-to-br from-navy/65 via-navy/25 to-sky/35 mix-blend-multiply" />
+              </div>
+
+              <svg viewBox="0 0 560 390" className="pointer-events-none absolute left-0 top-16 z-20 w-full overflow-visible" aria-hidden="true">
+                <polygon points="18,35 455,35 545,355 90,355" fill="none" stroke="currentColor" strokeWidth="2" className="text-sky" />
+              </svg>
+
+              <div className="absolute bottom-8 left-0 z-30 h-[48%] w-[62%] overflow-hidden bg-gradient-to-br from-sky-soft to-sky/40 shadow-soft [clip-path:polygon(15%_0,100%_0,82%_100%,0_100%)]">
                 <img
                   src={familiaHero}
-                  alt="Família celebrando a conquista da casa própria"
+                  alt="Família celebrando a realização de um sonho"
                   loading="lazy"
                   width={1024}
                   height={1536}
-                  className="absolute bottom-0 left-1/2 z-10 h-[78%] w-auto max-w-none -translate-x-1/2 object-contain drop-shadow-2xl"
+                  className="h-full w-full object-contain object-bottom grayscale"
                 />
-                <div className="absolute bottom-6 left-6 right-6 z-20 rounded-2xl border border-white/30 bg-white/85 p-3 shadow-soft backdrop-blur-md sm:left-8 sm:right-8">
-                  <img
-                    src={logoAsset}
-                    alt="Grupo Invest — Investimentos & Consórcios"
-                    loading="lazy"
-                    width={638}
-                    height={220}
-                    className="mx-auto h-16 w-full object-contain mix-blend-multiply sm:h-20"
-                  />
-                </div>
+                <div className="absolute inset-0 bg-sky/20 mix-blend-color" />
               </div>
-              <div className="glass-panel absolute -bottom-6 left-6 right-6 z-30 rounded-2xl px-5 py-4 sm:right-auto">
-                <p className="text-sm font-bold text-navy">Luiz Ricardo &amp; Talia Pinheiro</p>
-                <p className="text-xs text-muted-foreground">Gestores do Grupo Invest</p>
+
+              <div className="absolute bottom-[18%] left-3 z-40 flex h-20 w-24 items-center justify-center bg-sky p-2 shadow-soft sm:left-5 sm:h-24 sm:w-28">
+                <img
+                  src={logoAsset}
+                  alt="Grupo Invest"
+                  loading="lazy"
+                  width={638}
+                  height={638}
+                  className="h-full w-full object-contain mix-blend-multiply"
+                />
               </div>
-            </div>
-            <div>
+
+              <div className="absolute bottom-0 right-0 z-40 max-w-[250px] text-right">
+                <p className="text-xs font-bold uppercase tracking-[0.24em] text-sky">Grupo Invest</p>
+                <p className="mt-2 text-2xl font-extrabold leading-tight text-primary-foreground sm:text-3xl">
+                  Realizando sonhos. Construindo patrimônio.
+                </p>
+              </div>
+            </div>            <div>
               <p className="text-xs font-bold uppercase tracking-[0.22em] text-sky">Sobre nós</p>
               <h2 className="mt-3 text-3xl font-bold tracking-tight text-primary-foreground sm:text-4xl">
                 Transformamos oportunidades em patrimônio
